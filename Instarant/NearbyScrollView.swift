@@ -23,16 +23,22 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     var mediaArrayAll = NSMutableArray()
     
     var places: [placeModel] = []
+    
+    var URLtoSendToWebView = ""
+    
+    var cityOfUser = ""
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkForConnection()
 
     }
     
     override func viewDidAppear(animated: Bool) {
         
-        checkForConnection()
+        
 
     }
     
@@ -159,8 +165,9 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                     self.downloadErrorShow()
                     return
                     }
+                self.cityOfUser = closestCity as String
                 
-                self.currentCityLabel.text = "Searching near \(closestCity)..."
+                self.currentCityLabel.text = "Searching near \(self.cityOfUser)..."
                 
                 //Start of the individual lookup process
                 for ID in foursquareIDArray {
@@ -222,7 +229,8 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func sortPlaces(){
-
+        
+        
         self.places.sortInPlace({ $0.MediaArray.count > $1.MediaArray.count  })
         
         print("after sort:")
@@ -233,7 +241,8 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
             print(String(place.InstagramLocationInfo.name) + " media: " + String(place.MediaArray.count))
             
         }
-        
+        self.currentCityLabel.text = "Restaurants near \(self.cityOfUser)."
+
         MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
         self.tableView.reloadData()
     }
@@ -274,7 +283,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
             
         }
     */
-        //new line
+        
         
         return self.places.count
     
@@ -340,6 +349,12 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                     }
                 })
 
+                let scroll1Subviews = scroll1.subviews
+                if index == 0 {
+                    for view in scroll1Subviews {
+                        view.removeFromSuperview()
+                    }
+                }
                 
                 //Now we add that image view to the slider:
                 scroll1.addSubview(imageView)
@@ -349,7 +364,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                // imageView.addGestureRecognizer(tapGesture)
                 var button   = UIButton()
                 button.frame = imageView.frame
-                button.tag = Int(index) + (indexPath.row+1) * 10000
+                button.tag = Int(index+1) + (indexPath.row+1) * 10000
                 button.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
                 scroll1.addSubview(button)
                 
@@ -365,6 +380,9 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         
                 return cell
     }
+    
+    
+    //MARK: Tapping Image:
 
     func imageTapped(sender:UIButton){
         
@@ -372,18 +390,23 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         
         let row = (sender.tag-1)/10000
         
-        let particularLocation = places[row]
+        let particularLocation = places[row - 1]
         
-        let column = sender.tag % 1000
+        let column = (sender.tag % 1000)-1
         
-        let instaPic = particularLocation.MediaArray[column] as! InstagramMedia
-        
-        let picURL = instaPic.link
-        
-        let modal1 = ViewController()
-        self.presentViewController(modal1, animated: true) { () -> Void in
-            
+        print("column: \(column)")
+        print("array size: \(particularLocation.MediaArray.count)")
+        if particularLocation.MediaArray.count <= column {
+            return
         }
+        
+        guard let instaPic:InstagramMedia = particularLocation.MediaArray[column] as? InstagramMedia else {
+            return
+        }
+        
+        URLtoSendToWebView = instaPic.link
+        
+        self.performSegueWithIdentifier("s1", sender: self)
         
         print(particularLocation.InstagramLocationInfo.name)
         print(column)
@@ -391,5 +414,13 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if(segue.identifier == "s1") {
+            
+            var destinationVC = (segue.destinationViewController as! WebView)
+            destinationVC.URL = self.URLtoSendToWebView
+        }
+    }
     
 }

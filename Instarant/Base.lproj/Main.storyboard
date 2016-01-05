@@ -11,6 +11,52 @@
         </mutableArray>
     </customFonts>
     <scenes>
+        <!--Web View-->
+        <scene sceneID="75s-jh-Ulz">
+            <objects>
+                <viewController id="KqC-HA-SB5" customClass="WebView" customModule="Instarant" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OBi-HJ-HBz"/>
+                        <viewControllerLayoutGuide type="bottom" id="gB8-Ek-UFE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EgY-2V-VPO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wY-gG-7TB">
+                                <rect key="frame" x="0.0" y="55" width="320" height="513"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="KqC-HA-SB5" id="NDK-WQ-pib"/>
+                                </connections>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhj-VV-aK0">
+                                <rect key="frame" x="0.0" y="0.0" width="62" height="54"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeModal:" destination="KqC-HA-SB5" eventType="touchUpInside" id="mI1-ee-HPy"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="9wY-gG-7TB" firstAttribute="leading" secondItem="EgY-2V-VPO" secondAttribute="leadingMargin" constant="-20" id="Prt-2T-rku"/>
+                            <constraint firstItem="gB8-Ek-UFE" firstAttribute="top" secondItem="9wY-gG-7TB" secondAttribute="bottom" id="UOh-AQ-7dg"/>
+                            <constraint firstItem="9wY-gG-7TB" firstAttribute="top" secondItem="EgY-2V-VPO" secondAttribute="topMargin" constant="55" id="ZJC-MF-LRZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9wY-gG-7TB" secondAttribute="trailing" constant="-20" id="gNT-HI-Hof"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="myWebView" destination="9wY-gG-7TB" id="igA-tD-iX4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cWA-6T-5oa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="380" y="-356"/>
+        </scene>
         <!--Nearby Scroll View-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -89,8 +135,11 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Y47-xG-nq7"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Instarant" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhy-Je-mfe">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TrendEats" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhy-Je-mfe">
                                 <rect key="frame" x="109" y="30" width="103" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="1DL-4t-Tgi"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="KaushanScript-Regular" family="Kaushan Script" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -103,11 +152,18 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="nhy-Je-mfe" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="J4X-51-H4V"/>
+                            <constraint firstItem="nhy-Je-mfe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="89" id="ln2-FI-dzJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nhy-Je-mfe" secondAttribute="trailing" constant="88" id="yzd-mX-W52"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="USu-XW-TVi"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="currentCityLabel" destination="Hde-IV-5kr" id="ks2-5v-GMU"/>
                         <outlet property="tableView" destination="LFa-j1-uHM" id="gEj-Ny-NlU"/>
+                        <segue destination="KqC-HA-SB5" kind="presentation" identifier="s1" id="uQY-F2-HIq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

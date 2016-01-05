@@ -17,7 +17,7 @@ class LocationFunctions: UIViewController {
     
         let locMgr = INTULocationManager.sharedInstance()
         
-        locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.Neighborhood, timeout: 10.0, delayUntilAuthorized: true) { (currentLocation:CLLocation!, achievedAccuracy:INTULocationAccuracy, status:INTULocationStatus) -> Void in
+        locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.City, timeout: 10.0, delayUntilAuthorized: true) { (currentLocation:CLLocation!, achievedAccuracy:INTULocationAccuracy, status:INTULocationStatus) -> Void in
             if (status == INTULocationStatus.Success) {
                 // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
                 // currentLocation contains the device's current location.

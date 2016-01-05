@@ -10,6 +10,6 @@ import Foundation
 
 struct Constants {
     
-    static var numberOfDaysToSearchForPosts:Int = 14
+    static var numberOfDaysToSearchForPosts:Int = 30
     
 }
