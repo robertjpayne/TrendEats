@@ -10,4 +10,3 @@ pod 'ImageLoader'
 pod 'MBProgressHUD', '~> 0.9.2'
 pod 'SCLAlertView'
 pod "SwiftDate", "~> 2.0"
-pod 'EZAudio', '~> 1.1.2'
