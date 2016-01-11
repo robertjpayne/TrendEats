@@ -16,8 +16,6 @@
 		3B12DA2B1C280C8A0053F14F /* InstarantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B12DA2A1C280C8A0053F14F /* InstarantUITests.swift */; };
 		3B12DA391C280E9A0053F14F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B12DA381C280E9A0053F14F /* Constants.swift */; };
 		3B12DA3F1C28CA240053F14F /* FoursquareAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B12DA3E1C28CA240053F14F /* FoursquareAPI.swift */; };
-		3B3F378A1C4327EC00477AB7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3B3F37891C4327EC00477AB7 /* README.md */; };
-		3B3F378C1C43281100477AB7 /* Screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B3F378B1C43281100477AB7 /* Screenshot.png */; };
 		3B7DC0731C38537D00A0BE05 /* NetworkFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7DC0721C38537D00A0BE05 /* NetworkFunctions.swift */; };
 		3B9205891C28E36D004860F0 /* InstagramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9205881C28E36D004860F0 /* InstagramAPI.swift */; };
 		3B920C671C290989004860F0 /* InstagramEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B920C541C290989004860F0 /* InstagramEngine.m */; };
@@ -71,8 +69,6 @@
 		3B12DA2C1C280C8A0053F14F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B12DA381C280E9A0053F14F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3B12DA3E1C28CA240053F14F /* FoursquareAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursquareAPI.swift; sourceTree = "<group>"; };
-		3B3F37891C4327EC00477AB7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		3B3F378B1C43281100477AB7 /* Screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot.png; sourceTree = "<group>"; };
 		3B7DC0721C38537D00A0BE05 /* NetworkFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkFunctions.swift; sourceTree = "<group>"; };
 		3B9205881C28E36D004860F0 /* InstagramAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAPI.swift; sourceTree = "<group>"; };
 		3B920C531C290989004860F0 /* InstagramEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramEngine.h; sourceTree = "<group>"; };
@@ -169,8 +165,6 @@
 				3B12DA161C280C8A0053F14F /* Info.plist */,
 				3B920C701C290ABE004860F0 /* BridgingHeader.h */,
 				3B12DA381C280E9A0053F14F /* Constants.swift */,
-				3B3F37891C4327EC00477AB7 /* README.md */,
-				3B3F378B1C43281100477AB7 /* Screenshot.png */,
 			);
 			path = Instarant;
 			sourceTree = "<group>";
@@ -430,7 +424,6 @@
 				3B12DA151C280C8A0053F14F /* LaunchScreen.storyboard in Resources */,
 				3B12DA121C280C8A0053F14F /* Assets.xcassets in Resources */,
 				3B12DA101C280C8A0053F14F /* Main.storyboard in Resources */,
-				3B3F378C1C43281100477AB7 /* Screenshot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,7 +498,6 @@
 			files = (
 				3B920C6D1C290989004860F0 /* InstagramPaginationInfo.m in Sources */,
 				3BDE2FED1C3B74B80033E2E6 /* WebView.swift in Sources */,
-				3B3F378A1C4327EC00477AB7 /* README.md in Sources */,
 				3B920C6F1C290989004860F0 /* InstagramUser.m in Sources */,
 				3B920C6C1C290989004860F0 /* InstagramModel.m in Sources */,
 				3B920C671C290989004860F0 /* InstagramEngine.m in Sources */,
