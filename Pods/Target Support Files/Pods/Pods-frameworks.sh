@@ -86,20 +86,24 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/AFNetworking.framework"
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/EZAudio.framework"
   install_framework "Pods/INTULocationManager.framework"
   install_framework "Pods/ImageLoader.framework"
   install_framework "Pods/MBProgressHUD.framework"
   install_framework "Pods/SCLAlertView.framework"
   install_framework "Pods/SwiftDate.framework"
   install_framework "Pods/SwiftyJSON.framework"
+  install_framework "Pods/TPCircularBuffer.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/AFNetworking.framework"
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/EZAudio.framework"
   install_framework "Pods/INTULocationManager.framework"
   install_framework "Pods/ImageLoader.framework"
   install_framework "Pods/MBProgressHUD.framework"
   install_framework "Pods/SCLAlertView.framework"
   install_framework "Pods/SwiftDate.framework"
   install_framework "Pods/SwiftyJSON.framework"
+  install_framework "Pods/TPCircularBuffer.framework"
 fi

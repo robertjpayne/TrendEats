@@ -12,4 +12,4 @@
 #import "InstagramKit.h"
 
 
-#endif /* ForceTouchPractice-Bridging-Header */
+#endif 
