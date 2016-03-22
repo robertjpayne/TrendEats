@@ -28,6 +28,10 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     
     var cityOfUser = ""
 
+    
+    enum errorThrows:ErrorType {
+        case generic
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,23 +39,18 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         checkForConnection()
 
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        
-        
 
-    }
+    
+    
     
     func checkForConnection() {
         
-        //TODO: Need to address case where device may be connected to a wifi network where an access code is needed. The following Reachability method only checks for an active connection, but it does not seem to actually test the connection.
+        //TODO: Need to address case where device may be connected to a wifi network where an access code is needed. The following Reachability method only checks for an active connection, but does not actually test the connection.
         
         if NetworkFunctions.Reachability.isConnectedToNetwork() {
             
             downloadData()
-            
-            
-            
+
         } else {
             
             let alertView = SCLAlertView()
@@ -61,77 +60,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         }
         
     }
-    
-   // MARK: Load Data
-/*
-    func downloadData(){
-        
-        //Show progress spinning wheel (not using GCD here since there's nothing yet to interact with at this point).
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        
-        
-        LocationFunctions.getCoordinates { (location, success) -> Void in
-            
-            if !success || location == nil {
-                self.downloadErrorShow()
-                return
-            }
-            
-            let theSpot:CLLocation! = location
-            var latString = String(theSpot.coordinate.latitude)
-            var lonString = String(theSpot.coordinate.longitude)
-    
-            FoursquareAPI.getNearbyRestaurantIDs(latString, longitude: lonString)  {
-                (foursquareIDArray:NSMutableArray?, closestCity:NSString?, success:Bool) in
-                
-                if !success || foursquareIDArray == nil || closestCity == nil{
-                    self.downloadErrorShow()
-                    return
-                }
-                
-                //Here we use optional binging...for the sake of exhibition.
-                if let closestCity2:NSString = closestCity {
-                    self.currentCityLabel.text = "Searching near \(closestCity2)..."
-                }
-                
-                //And here, we're forcing the type. (Which we can do since we've already handled the failure case with "if !success" above.
-                InstagramAPI.getInstagramLocationsFromFoursquareArray(foursquareIDArray as NSMutableArray!, completion: { (instaLocations:NSMutableArray) -> Void in
-                    print("locations:\(instaLocations)")
-                    
-                    if instaLocations.count < 2 {
-                        self.downloadErrorShow()
-                        return
-                    }
-                    
-                    InstagramAPI.getRecentPhotosFromLocations(instaLocations, completion: { (result) -> Void in
- 
-                        if result.count < 2 {
-                            self.downloadErrorShow()
-                            return
-                        }
-
-                        //Final step is to save the media and reload the table view.
-                        self.mediaArrayAll = result
-                        print("count of mediaArrayAll:\(self.mediaArrayAll.count)")
-                        self.tableView.reloadData()
-                        
-                        //Hide the progress wheel
-                        MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
-                        self.currentCityLabel.text = "Restaurants near \(closestCity as NSString!)."
-                        
-                        
-                    })
-                    
-                })
-            }
-        }
-        
-    }
-    */
-    
-    enum errorThrows:ErrorType {
-        case generic
-    }
+   
     
     
     func downloadData() {
@@ -271,20 +200,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        /*
-        if self.places.count < 1 {
-            
-            let pullToRefreshLabel = UILabel(frame: self.view.frame)
-            pullToRefreshLabel.text = "Pull to refresh."
-            //pullToRefreshLabel.textAlignment =
-            pullToRefreshLabel.textColor = UIColor.whiteColor()
-            self.view.addSubview(pullToRefreshLabel)
-            
-        }
-    */
-        
-        
+
         return self.places.count
     
     }
