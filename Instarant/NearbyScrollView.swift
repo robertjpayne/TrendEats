@@ -84,11 +84,11 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
             let lonString = String(theSpot.coordinate.longitude)
             
             FoursquareAPI.getNearbyRestaurantIDs(latString, longitude: lonString)  {
-                (foursquareIDArray:NSMutableArray?, closestCity:NSString?, success:Bool) in
+                (foursquareArray:NSMutableArray?, closestCity:NSString?, success:Bool) in
                 
                 //Input Validation
                 guard let closestCity:NSString = closestCity,
-                      let foursquareIDArray:NSMutableArray = foursquareIDArray
+                      let foursquareArray:NSMutableArray = foursquareArray
                     where success
                     else {
                     self.downloadErrorShow()
@@ -99,21 +99,17 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 self.currentCityLabel.text = "Searching near \(self.cityOfUser)..."
                 
                 //Start of the individual lookup process
-                for ID in foursquareIDArray {
+                for object in foursquareArray {
                     
-                    guard let ID:String = ID as! String,
-                        let foursquareIDArray:NSArray = foursquareIDArray as! NSArray
-                        else {
-                        return
-                    }
                     
-                    //Init a new placeModel
-                    let newPlace = placeModel()
+//                    //Init a new placeModel
+                    guard let newPlace:placeModel = object as! placeModel else {return}
                     newPlace.MediaArray = []
-                    //Save the FS ID
-                    newPlace.FoursquareID = ID
                     
-                    InstagramAPI.getInstagramLocationFromFoursquareID(ID, completion: { (result) -> Void in
+                    
+                     InstagramAPI.getLocationWithGeopoint(newPlace.geopoint!) { (result, success) in
+                    
+//                    InstagramAPI.getInstagramLocationFromFoursquareID(newPlace.FoursquareID as String, location: newPlace.geopoint!, completion: { (result) -> Void in
                         guard let particularLocation:InstagramLocation = result else {
                             return
                         }
@@ -136,7 +132,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                             
                         })//end getRecentPhotosFromLocation
                         
-                    })//end getInstagramLocationFromFoursquareID
+                    }//end getLocation with geopoint
                     
                 }//end for loop
 
@@ -146,7 +142,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         }//end getCoordinates
 
     }//end downloadData2
-    
+   
 
     
     func downloadErrorShow(){

@@ -14,6 +14,7 @@ class placeModel {
     var FoursquareID:NSString!
     var FoursquareInfo:NSDictionary!
     var MediaArray:NSMutableArray!
+    var geopoint: CLLocationCoordinate2D?
     
 
 }

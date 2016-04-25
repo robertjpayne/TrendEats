@@ -110,7 +110,7 @@ class InstagramAPI: UIViewController {
     //MARK: Single style:
     
     
-    class func getInstagramLocationFromFoursquareID(FSID:String, completion: (result: InstagramLocation?) -> Void){
+    class func getInstagramLocationFromFoursquareID(FSID:String, location:CLLocationCoordinate2D, completion: (result: InstagramLocation?) -> Void){
         
         let igEngine = InstagramEngine()
         
@@ -200,5 +200,24 @@ class InstagramAPI: UIViewController {
         
         
     }// getRecentPhotosFromLocation
+    
+  
+    
+    class func getLocationWithGeopoint(geopoint: CLLocationCoordinate2D, completion: (result:InstagramLocation,success:Bool) -> Void) {
+        
+        InstagramEngine().searchLocationsAtLocation(geopoint, withSuccess: { (locations: [AnyObject]!, paginationInfo: InstagramPaginationInfo!) in
+            
+            print("location here...")
+            if let x:InstagramLocation = locations.first as! InstagramLocation {
+                print(x.name)
+                completion(result: x, success: true)
+            }
+            
+            
+        }) { (error: NSError!, errorCode: Int) in
+                
+        }
+        
+    }
 
 }

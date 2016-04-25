@@ -29,8 +29,8 @@ class FoursquareAPI: UIViewController {
         let radius = String(0) //optional
         
         let URL = "https://api.foursquare.com/v2/venues/explore?v=20131016&ll=\(latitude)%2C\(longitude)&section=\(category)&novelty=new\(radius)" + keys.authString
-        
-        let idsArray = NSMutableArray()
+                
+        let foursquareArray = NSMutableArray()
         
         Alamofire.request(.GET, URL)
             .responseJSON { response in
@@ -45,7 +45,16 @@ class FoursquareAPI: UIViewController {
                         for (key, item) in items {
                             
                             if let id = item["venue"]["id"].string {
-                                idsArray.addObject(id)
+                                let place = placeModel()
+                                place.FoursquareID = id
+                                
+                                if let lat = item["venue"]["location"]["lat"].double {
+                                    if let lon = item["venue"]["location"]["lng"].double {
+                                        place.geopoint = CLLocationCoordinate2DMake(lat,lon)
+                                    }
+                                }
+                                //idsArray.addObject(id)
+                                foursquareArray.addObject(place)
                                 
                                 //print("\(item["venue"]["name"]) is located in: \(item["venue"]["location"]["city"].string!)")
                             }
@@ -56,7 +65,7 @@ class FoursquareAPI: UIViewController {
                         let city:NSString = json["response"]["headerLocation"].string!
                         
                         //Now we send the completed array back up the chain.
-                        completion(result: idsArray, closestCity: city, success: true)
+                        completion(result: foursquareArray, closestCity: city, success: true)
                         
                     }
                     else {
