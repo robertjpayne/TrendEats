@@ -6,93 +6,93 @@
 	<dict>
 		<key>AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>INTULocationManager.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>ImageLoader.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-Instarant.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SCLAlertView.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SwiftDate.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>8</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>9</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1C3436CEA5C3D39764C5F54374794ECB</key>
+		<key>0089E5D8E00A68E3415BE67CC52EDE73</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>432ECC54282C84882B482CCB4CF227FC</key>
+		<key>32908212BF8BC7411CEC6F782DA71239</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6185C1AC66C791A53739A76AB0550274</key>
+		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B0FE1CF55DD4F78BEE237C1243C98367</key>
+		<key>53E9C6FBAFF00C5D2DEACBA2FD4B8EF4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C10EFA928E7114BFF77CBD57226437E5</key>
+		<key>57AF9A6B47732E152D32CB0BF4EF25AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CEADFAD6FC19354A6D25B57F7E06B9FE</key>
+		<key>632A766EEE68A7A0C10B0AC0649A99DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DDEA9A51A0914A0E1B5303DD6580FA05</key>
+		<key>7E683DB16DC4643221505F9973C9BC36</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
+		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EC517BA2A392BF41EC8542F11C4CFA62</key>
+		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

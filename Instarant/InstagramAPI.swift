@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class InstagramAPI: UIViewController {
     
-    class func getInstagramLocationsFromFoursquareArray(Array:NSArray, completion: (result: NSMutableArray) -> Void){
+    class func getInstagramLocationsFromFoursquareArray(_ Array:NSArray, completion: @escaping (_ result: NSMutableArray) -> Void){
                 
         let igEngine = InstagramEngine()
         
@@ -27,8 +27,8 @@ class InstagramAPI: UIViewController {
                 //Optional Binding:
                 if let optionalLocation = igLoc {
                     
-                    print("igLoc.Id: \(optionalLocation.Id)")
-                    InstagramLocationMutableArray.addObject(optionalLocation)
+                    print("igLoc.Id: \(optionalLocation.id)")
+                    InstagramLocationMutableArray.add(optionalLocation)
                     
                 } else {
                     print("No ID string found for this location")
@@ -59,7 +59,7 @@ class InstagramAPI: UIViewController {
     }
     
     
-    class func getRecentPhotosFromLocations(Array:NSMutableArray!, completion: (result: NSMutableArray) -> Void){
+    class func getRecentPhotosFromLocations(_ Array:NSMutableArray!, completion: @escaping (_ result: NSMutableArray) -> Void){
         
         let igEngine = InstagramEngine()
         
@@ -74,14 +74,14 @@ class InstagramAPI: UIViewController {
             
             let locationClone:InstagramLocation = location as! InstagramLocation
             
-            igEngine.getMediaHelper(locationClone.Id, andCompletionHandler: { (media) -> Void in
+            igEngine.getMediaHelper(locationClone.id, andCompletionHandler: { (media) -> Void in
                 
-                if media.count > 3 {
+                if (media?.count)! > 3 {
                     //We add the "media packet" to the output array.
-                    mediaArrayOutput.addObject(media)
+                    mediaArrayOutput.add(media)
                     
                 } else {
-                    countOfUsableMediaPacketsFromInputArray--
+                    countOfUsableMediaPacketsFromInputArray -= 1
                 }
                
                 
@@ -91,7 +91,7 @@ class InstagramAPI: UIViewController {
                 
                 //Check if either last one as well as limit the number of images to add.
                 if countOfUsableMediaPacketsFromInputArray == mediaArrayOutput.count {
-                    completion(result: mediaArrayOutput)
+                    completion(mediaArrayOutput)
                     
                 }
             })
@@ -110,7 +110,7 @@ class InstagramAPI: UIViewController {
     //MARK: Single style:
     
     
-    class func getInstagramLocationFromFoursquareID(FSID:String, location:CLLocationCoordinate2D, completion: (result: InstagramLocation?) -> Void){
+    class func getInstagramLocationFromFoursquareID(_ FSID:String, location:CLLocationCoordinate2D, completion: @escaping (_ result: InstagramLocation?) -> Void){
         
         let igEngine = InstagramEngine()
         
@@ -121,7 +121,7 @@ class InstagramAPI: UIViewController {
         
         igEngine.foursquareHelper2(FSID) { (igLoc:InstagramLocation!) -> Void in
             
-            completion(result: igLoc)
+            completion(igLoc)
         }
         
     }
@@ -130,15 +130,14 @@ class InstagramAPI: UIViewController {
     
     
 
-    class func getRecentPhotosFromLocation(location:InstagramLocation, nextPageID:String?, previousPhotoSet:NSArray, completion: (result: NSMutableArray) -> Void){
+    class func getRecentPhotosFromLocation(_ location:InstagramLocation, nextPageID:String?, previousPhotoSet:NSArray, completion: @escaping (_ result: NSMutableArray) -> Void){
                 
         let days:Int = Constants.numberOfDaysToSearchForPosts
         let daysObjc = Int32(days)
 
-        InstagramEngine().getMediaTimeIntervalHelper(location.Id, daysAgo: daysObjc, minID:nextPageID) { (media, paginationInfo) -> Void in
+        InstagramEngine().getMediaTimeIntervalHelper(location.id, daysAgo: daysObjc, minID:nextPageID) { (media, paginationInfo) -> Void in
             
-            guard let media:NSArray = media
-                where media.count > 0
+            guard let media:NSArray = media, as NSArray? media.count > 0
                 else {
                 return
             }
@@ -153,22 +152,22 @@ class InstagramAPI: UIViewController {
                 
                 //need to filter out "self-posts" from the restaurant itself.
                 let object = object as! InstagramMedia
-                let user = object.user as! InstagramUser
+                let user = object.user as InstagramUser
                 let userName = user.username
                 print(userName)
-                var index1 = userName.startIndex.advancedBy(0)
-                if userName.characters.count < 4 {
-                   index1 = userName.startIndex.advancedBy(2)
+                var index1 = userName?.index(userName?.startIndex, offsetBy: 0)
+                if userName?.characters.count < 4 {
+                   index1 = userName.index(userName.startIndex, offsetBy: 2)
                 } else {
-                    index1 = userName.startIndex.advancedBy(4)
+                    index1 = userName.index(userName.startIndex, offsetBy: 4)
                 }
-                var truncatedUsername = userName.substringToIndex(index1).lowercaseString
-                let locationName = object.locationName.lowercaseString
-                if locationName.containsString(truncatedUsername) {
+                var truncatedUsername = userName.substringToIndex(index1).lowercased()
+                let locationName = object.locationName.lowercased()
+                if locationName.contains(truncatedUsername) {
                     print("\(userName) posted about their own place: \(locationName) and we've removed their post")
                     
                 } else {
-                   combo.addObject(object)
+                   combo.add(object)
                 }
 
             }
@@ -178,7 +177,7 @@ class InstagramAPI: UIViewController {
                 //case 2.
                 
                 //The kick:
-                completion(result: combo)
+                completion(combo)
                 return
             }
             
@@ -191,7 +190,7 @@ class InstagramAPI: UIViewController {
                 
                 //case 3.
                 //"A dream within a dream" This is where the kick performs it's domino effect from one level to the next "riding it all the way to the top". In essance, case 2 only happens once you are n levels deep, but for every level other than the last one, you need to send the completion with the result of the level beneath it.
-                completion(result: result)
+                completion(result)
                 
             })//end recursive getRecentPhotosFromLocation
 
@@ -203,9 +202,9 @@ class InstagramAPI: UIViewController {
     
   
     
-    class func getLocationWithGeopoint(geopoint: CLLocationCoordinate2D, completion: (result:InstagramLocation,success:Bool) -> Void) {
+    class func getLocationWithGeopoint(_ geopoint: CLLocationCoordinate2D, completion: @escaping (_ result:InstagramLocation,_ success:Bool) -> Void) {
         
-        InstagramEngine().searchLocationsAtLocation(geopoint, withSuccess: { (locations: [AnyObject]!, paginationInfo: InstagramPaginationInfo!) in
+        InstagramEngine().searchLocations(atLocation: geopoint, withSuccess: { (locations: [AnyObject]!, paginationInfo: InstagramPaginationInfo!) in
             
             print("location here...")
             if let x:InstagramLocation = locations.first as! InstagramLocation {

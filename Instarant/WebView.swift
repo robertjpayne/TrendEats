@@ -16,9 +16,9 @@ class WebView: UIViewController {
     
     var URL = ""
     
-    @IBAction func closeModal(sender: AnyObject) {
+    @IBAction func closeModal(_ sender: AnyObject) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -29,22 +29,22 @@ class WebView: UIViewController {
         print("\(URL)")
         
         if URL == "" {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        let url1 = NSURL(string: URL)
-        let request = NSMutableURLRequest(URL: url1!)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        let url1 = Foundation.URL(string: URL)
+        let request = NSMutableURLRequest(url: url1!)
         
-        self.myWebView.loadRequest(request)
+        self.myWebView.loadRequest(request as URLRequest)
         
        
         
         
     }
     
-    func webViewDidFinishLoad(webView: UIWebView!) {
+    func webViewDidFinishLoad(_ webView: UIWebView!) {
         //Hide the activity indicator.
-        MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
     }
 
 

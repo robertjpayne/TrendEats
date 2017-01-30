@@ -12,13 +12,13 @@ import INTULocationManager
 
 class LocationFunctions: UIViewController {
 
-    class func getCoordinates (completion: (location: CLLocation?,success:Bool) -> Void) {
+    class func getCoordinates (_ completion: @escaping (_ location: CLLocation?,_ success:Bool) -> Void) {
     
     
         let locMgr = INTULocationManager.sharedInstance()
         
-        locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.City, timeout: 10.0, delayUntilAuthorized: true) { (currentLocation:CLLocation!, achievedAccuracy:INTULocationAccuracy, status:INTULocationStatus) -> Void in
-            if (status == INTULocationStatus.Success) {
+        locMgr.requestLocation(withDesiredAccuracy: INTULocationAccuracy.city, timeout: 10.0, delayUntilAuthorized: true) { (currentLocation:CLLocation!, achievedAccuracy:INTULocationAccuracy, status:INTULocationStatus) -> Void in
+            if (status == INTULocationStatus.success) {
                 // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
                 // currentLocation contains the device's current location.
                 
@@ -27,7 +27,7 @@ class LocationFunctions: UIViewController {
 
                 
             }
-            else if (status == INTULocationStatus.TimedOut) {
+            else if (status == INTULocationStatus.timedOut) {
                 // Wasn't able to locate the user with the requested accuracy within the timeout interval.
                 // However, currentLocation contains the best location available (if any) as of right now,
                 // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
@@ -40,7 +40,7 @@ class LocationFunctions: UIViewController {
                 completion(location: nil, success: false)
             }
             
-        }//end requestLoc...
+        } as! INTULocationRequestBlock as! INTULocationRequestBlock as! INTULocationRequestBlock as! INTULocationRequestBlock as! INTULocationRequestBlock as! INTULocationRequestBlock as! INTULocationRequestBlock//end requestLoc...
         
     
     }//end getCoordinates

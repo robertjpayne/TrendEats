@@ -29,7 +29,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     var cityOfUser = ""
 
     
-    enum errorThrows:ErrorType {
+    enum errorThrows:Error {
         case generic
     }
 
@@ -66,14 +66,13 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     func downloadData() {
         
         //Show progress spinning wheel (not using GCD here since there's nothing yet to interact with at this point).
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         
         
         LocationFunctions.getCoordinates { (location, success) -> Void in
             
             //Input Validation
-            guard let theSpot:CLLocation = location
-                where success
+            guard let theSpot:CLLocation = location, success
                 else {
                 print("success = 0 from getCoordinates")
                 self.downloadErrorShow()
@@ -88,8 +87,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 
                 //Input Validation
                 guard let closestCity:NSString = closestCity,
-                      let foursquareArray:NSMutableArray = foursquareArray
-                    where success
+                      let foursquareArray:NSMutableArray = foursquareArray, success
                     else {
                     self.downloadErrorShow()
                     return
@@ -119,7 +117,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                         
                         InstagramAPI.getRecentPhotosFromLocation(particularLocation, nextPageID:nil,previousPhotoSet:[], completion: { (result) -> Void in
                             
-                          newPlace.MediaArray.addObjectsFromArray(result as [AnyObject])
+                          newPlace.MediaArray.addObjects(from: result as [AnyObject])
                             self.places.append(newPlace)
                             print("There are now \(newPlace.MediaArray.count) photos of \(newPlace.InstagramLocationInfo.name)")
                             
@@ -149,18 +147,18 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         let alertView = SCLAlertView()
         alertView.addButton("Retry", target:self, selector:Selector("downloadData"))
         alertView.showError("", subTitle: "We're having some trouble getting nearby restaurants.", closeButtonTitle: "Close")
-        MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
 
     }
     
     func sortPlaces(){
         
         
-        self.places.sortInPlace({ $0.MediaArray.count > $1.MediaArray.count  })
+        self.places.sort(by: { $0.MediaArray.count > $1.MediaArray.count  })
         
         print("after sort:")
         for place in self.places  {
-            guard let place:placeModel = place as! placeModel else {
+            guard let place:placeModel = place else {
                 return
             }
             print(String(place.InstagramLocationInfo.name) + " media: " + String(place.MediaArray.count))
@@ -168,7 +166,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         }
         self.currentCityLabel.text = "Restaurants near \(self.cityOfUser)."
 
-        MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         self.tableView.reloadData()
     }
     
@@ -177,16 +175,16 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     //----------------------------------------------------------------------------------------------------------------
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //To take the shading off the row when it's selected
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 
     
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         
         print("setting up table")
@@ -195,14 +193,14 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return self.places.count
     
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         
         //Creates the entire image slider (for each cell):
@@ -221,18 +219,18 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         //let mediaPacket = mediaArrayAll.objectAtIndex(indexPath.row) as! NSArray
         let placesExp = NSMutableArray(array: self.places)
         let particularPlace:placeModel = placesExp[indexPath.row] as! placeModel
-        let mediaArray = particularPlace.MediaArray as! NSMutableArray
+        let mediaArray = particularPlace.MediaArray as NSMutableArray
         var index:CGFloat = -1
         
         
         //Set labels:
-        label1.text = " \(particularPlace.InstagramLocationInfo.name.uppercaseString)"
+        label1.text = " \(particularPlace.InstagramLocationInfo.name.uppercased())"
         labelBigNumber.text = "\(mediaArray.count)"
         labelTimeFrame.text = "Instagram posts in the last \(Constants.numberOfDaysToSearchForPosts) days."
         
         for photo in mediaArray {
             
-            index++
+            index += 1
             
             if let photoClone = photo as? InstagramMedia{
 
@@ -243,8 +241,8 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 label1.attributedText = attributedString
                 
                 //We make the UIImageView
-                let imageView = UIImageView(frame: CGRectMake(imageWidth*index, 0,imageWidth, imageHeight))
-                imageView.contentMode = .ScaleAspectFill
+                let imageView = UIImageView(frame: CGRect(x: imageWidth*index, y: 0,width: imageWidth, height: imageHeight))
+                imageView.contentMode = .scaleAspectFill
                 
                 
                 
@@ -277,7 +275,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 var button   = UIButton()
                 button.frame = imageView.frame
                 button.tag = Int(index+1) + (indexPath.row+1) * 10000
-                button.addTarget(self, action: "imageTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+                button.addTarget(self, action: #selector(NearbyScrollView.imageTapped(_:)), for: UIControlEvents.touchUpInside)
                 scroll1.addSubview(button)
                 
                 
@@ -287,7 +285,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         }//end for loop
         
         //Set the contentSize to fit all the pictures in the media Packet.
-        scroll1.contentSize = CGSizeMake(imageWidth * CGFloat(mediaArray.count), scroll1.frame.height)
+        scroll1.contentSize = CGSize(width: imageWidth * CGFloat(mediaArray.count), height: scroll1.frame.height)
 
         
                 return cell
@@ -296,7 +294,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     
     //MARK: Tapping Image:
 
-    func imageTapped(sender:UIButton){
+    func imageTapped(_ sender:UIButton){
         
         print("\(sender.tag)")
         
@@ -318,7 +316,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         
         URLtoSendToWebView = instaPic.link
         
-        self.performSegueWithIdentifier("s1", sender: self)
+        self.performSegue(withIdentifier: "s1", sender: self)
         
         print(particularLocation.InstagramLocationInfo.name)
         print(column)
@@ -326,11 +324,11 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if(segue.identifier == "s1") {
             
-            var destinationVC = (segue.destinationViewController as! WebView)
+            let destinationVC = (segue.destination as! WebView)
             destinationVC.URL = self.URLtoSendToWebView
         }
     }

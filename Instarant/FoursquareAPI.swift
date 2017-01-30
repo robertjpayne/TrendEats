@@ -20,7 +20,7 @@ class FoursquareAPI: UIViewController {
     }
 
     
-    class func getNearbyRestaurantIDs (latitude: String, longitude:String, completion: (result: NSMutableArray?, closestCity:NSString?,success:Bool) -> Void) {
+    class func getNearbyRestaurantIDs (_ latitude: String, longitude:String, completion: @escaping (_ result: NSMutableArray?, _ closestCity:NSString?,_ success:Bool) -> Void) {
         //For reference on closures: https://thatthinginswift.com/completion-handlers/
         
         //GOAL: To get a list of restaurant ID strings from the "explore" endpoint.
