@@ -17,14 +17,14 @@ class LocationFunctions: UIViewController {
     
         let locMgr = INTULocationManager.sharedInstance()
         
-        locMgr.requestLocation(withDesiredAccuracy: INTULocationAccuracy.city, timeout: 10.0, delayUntilAuthorized: true) { (currentLocation:CLLocation!, achievedAccuracy:INTULocationAccuracy, status:INTULocationStatus) -> Void in
+        locMgr.requestLocation(withDesiredAccuracy: .city, timeout: 10.0) { (currentLocation, achievedAccuracy, status) in
             if (status == INTULocationStatus.success) {
                 // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
                 // currentLocation contains the device's current location.
                 
                 //print(currentLocation.coordinate.latitude)
-                completion(location: currentLocation, success: true)
-
+                completion(currentLocation, true)
+                
                 
             }
             else if (status == INTULocationStatus.timedOut) {
@@ -32,17 +32,15 @@ class LocationFunctions: UIViewController {
                 // However, currentLocation contains the best location available (if any) as of right now,
                 // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
                 print("Location timed out")
-                completion(location: currentLocation, success: false)
+                completion(currentLocation, false)
             }
             else {
                 // An error occurred, more info is available by looking at the specific status returned.
                 print("Error retrieving location")
-                completion(location: nil, success: false)
+                completion(nil, false)
             }
-            
-        } as! INTULocationRequestBlock as! INTULocationRequestBlock as! INTULocationRequestBlock as! INTULocationRequestBlock as! INTULocationRequestBlock as! INTULocationRequestBlock as! INTULocationRequestBlock//end requestLoc...
-        
-    
+        }
+
     }//end getCoordinates
     
   

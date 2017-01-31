@@ -36,31 +36,33 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkForConnection()
+//        checkForConnection()
+        downloadData()
+
 
     }
 
     
     
     
-    func checkForConnection() {
-        
-        //TODO: Need to address case where device may be connected to a wifi network where an access code is needed. The following Reachability method only checks for an active connection, but does not actually test the connection.
-        
-        if NetworkFunctions.Reachability.isConnectedToNetwork() {
-            
-            downloadData()
-
-        } else {
-            
-            let alertView = SCLAlertView()
-            alertView.addButton("Retry", target:self, selector:Selector("checkForConnection"))
-            alertView.showError("", subTitle: "No internet connection")
-            
-        }
-        
-    }
-   
+//    func checkForConnection() {
+//        
+//        //TODO: Need to address case where device may be connected to a wifi network where an access code is needed. The following Reachability method only checks for an active connection, but does not actually test the connection.
+//        
+//        if NetworkFunctions.Reachability.isConnectedToNetwork() {
+//            
+//            downloadData()
+//
+//        } else {
+//            
+//            let alertView = SCLAlertView()
+//            alertView.addButton("Retry", target:self, selector:Selector("checkForConnection"))
+//            alertView.showError("", subTitle: "No internet connection")
+//            
+//        }
+//        
+//    }
+//   
     
     
     func downloadData() {
@@ -83,10 +85,10 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
             let lonString = String(theSpot.coordinate.longitude)
             
             FoursquareAPI.getNearbyRestaurantIDs(latString, longitude: lonString)  {
-                (foursquareArray:NSMutableArray?, closestCity:NSString?, success:Bool) in
+                (foursquareArray:NSMutableArray?, closestCity:String?, success:Bool) in
                 
                 //Input Validation
-                guard let closestCity:NSString = closestCity,
+                guard let closestCity = closestCity,
                       let foursquareArray:NSMutableArray = foursquareArray, success
                     else {
                     self.downloadErrorShow()
@@ -104,33 +106,32 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                     guard let newPlace:placeModel = object as! placeModel else {return}
                     newPlace.MediaArray = []
                     
-                    
-                     InstagramAPI.getLocationWithGeopoint(newPlace.geopoint!) { (result, success) in
-                    
-//                    InstagramAPI.getInstagramLocationFromFoursquareID(newPlace.FoursquareID as String, location: newPlace.geopoint!, completion: { (result) -> Void in
-                        guard let particularLocation:InstagramLocation = result else {
-                            return
-                        }
-                        //Save the InstagramLocation
-                        newPlace.InstagramLocationInfo = particularLocation
-                          print("newPlace.InstagramLocationInfo: \(newPlace.InstagramLocationInfo.name)")
-                        
-                        InstagramAPI.getRecentPhotosFromLocation(particularLocation, nextPageID:nil,previousPhotoSet:[], completion: { (result) -> Void in
-                            
-                          newPlace.MediaArray.addObjects(from: result as [AnyObject])
-                            self.places.append(newPlace)
-                            print("There are now \(newPlace.MediaArray.count) photos of \(newPlace.InstagramLocationInfo.name)")
-                            
-                            
-                            //TODO: Issues with this: We reload every time a restaurant is completed, but it's hard to tell when we're on the last restaurant, because they come back up the line asynchronously and some that don't have any pictures won't come through at all.
-                                self.sortPlaces()
-                            
-                            
-                           
-                            
-                        })//end getRecentPhotosFromLocation
-                        
-                    }//end getLocation with geopoint
+//                     InstagramAPI.getLocationWithGeopoint(newPlace.geopoint!) { (result, success) in
+//                    
+////                    InstagramAPI.getInstagramLocationFromFoursquareID(newPlace.FoursquareID as String, location: newPlace.geopoint!, completion: { (result) -> Void in
+//                        guard let particularLocation:InstagramLocation = result else {
+//                            return
+//                        }
+//                        //Save the InstagramLocation
+//                        newPlace.InstagramLocationInfo = particularLocation
+//                          print("newPlace.InstagramLocationInfo: \(newPlace.InstagramLocationInfo.name)")
+//                        
+//                        InstagramAPI.getRecentPhotosFromLocation(particularLocation, nextPageID:nil,previousPhotoSet:[], completion: { (result) -> Void in
+//                            
+//                          newPlace.MediaArray.addObjects(from: result as [AnyObject])
+//                            self.places.append(newPlace)
+//                            print("There are now \(newPlace.MediaArray.count) photos of \(newPlace.InstagramLocationInfo.name)")
+//                            
+//                            
+//                            //TODO: Issues with this: We reload every time a restaurant is completed, but it's hard to tell when we're on the last restaurant, because they come back up the line asynchronously and some that don't have any pictures won't come through at all.
+//                                self.sortPlaces()
+//                            
+//                            
+//                           
+//                            
+//                        })//end getRecentPhotosFromLocation
+//                        
+//                    }//end getLocation with geopoint
                     
                 }//end for loop
 
@@ -249,15 +250,15 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 //Swift Image loader:
                 let URL = photoClone.thumbnailURL
                 print("url for image =\(URL)at this location:\(photoClone.locationName)")
-                imageView.load(URL, placeholder: nil, completionHandler: { (URL, image, error, cacheType) -> Void in
-                    if cacheType == CacheType.None {
-                        let transition = CATransition()
-                        transition.duration = 0.5
-                        transition.type = kCATransitionFade
-                        imageView.layer.addAnimation(transition, forKey: nil)
-                        imageView.image = image
-                    }
-                })
+//                imageView.load(URL, placeholder: nil, completionHandler: { (URL, image, error, cacheType) -> Void in
+//                    if cacheType == CacheType.None {
+//                        let transition = CATransition()
+//                        transition.duration = 0.5
+//                        transition.type = kCATransitionFade
+//                        imageView.layer.addAnimation(transition, forKey: nil)
+//                        imageView.image = image
+//                    }
+//                })
 
                 let scroll1Subviews = scroll1.subviews
                 if index == 0 {

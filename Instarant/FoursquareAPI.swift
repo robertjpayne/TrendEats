@@ -20,7 +20,7 @@ class FoursquareAPI: UIViewController {
     }
 
     
-    class func getNearbyRestaurantIDs (_ latitude: String, longitude:String, completion: @escaping (_ result: NSMutableArray?, _ closestCity:NSString?,_ success:Bool) -> Void) {
+    class func getNearbyRestaurantIDs (_ latitude: String, longitude:String, completion: @escaping (_ result: NSMutableArray?, _ closestCity:String?,_ success:Bool) -> Void) {
         //For reference on closures: https://thatthinginswift.com/completion-handlers/
         
         //GOAL: To get a list of restaurant ID strings from the "explore" endpoint.
@@ -32,7 +32,7 @@ class FoursquareAPI: UIViewController {
                 
         let foursquareArray = NSMutableArray()
         
-        Alamofire.request(.GET, URL)
+        Alamofire.request(URL)
             .responseJSON { response in
 
                 //Parsing the JSON:
@@ -43,7 +43,7 @@ class FoursquareAPI: UIViewController {
                         let items = json["response"]["groups"][0]["items"]
                         
                         for (key, item) in items {
-                            
+                            print(item["venue"])
                             if let id = item["venue"]["id"].string {
                                 let place = placeModel()
                                 place.FoursquareID = id
@@ -54,7 +54,7 @@ class FoursquareAPI: UIViewController {
                                     }
                                 }
                                 //idsArray.addObject(id)
-                                foursquareArray.addObject(place)
+                                foursquareArray.add(place)
                                 
                                 //print("\(item["venue"]["name"]) is located in: \(item["venue"]["location"]["city"].string!)")
                             }
@@ -62,15 +62,15 @@ class FoursquareAPI: UIViewController {
                             
                         }//end for loop
                         
-                        let city:NSString = json["response"]["headerLocation"].string!
+                        let city = json["response"]["headerLocation"].string!
                         
                         //Now we send the completed array back up the chain.
-                        completion(result: foursquareArray, closestCity: city, success: true)
+                        completion(foursquareArray, city, true)
                         
                     }
                     else {
                         print(json["response"]["warning"]["text"].string)
-                        completion(result: nil, closestCity: nil, success: false)
+                        completion(nil, nil, false)
                     }
                     
                     

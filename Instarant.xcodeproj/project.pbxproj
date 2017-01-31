@@ -33,6 +33,7 @@
 		3B920CA61C30AD0F004860F0 /* placeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B920CA51C30AD0F004860F0 /* placeModel.swift */; };
 		3BDE2FED1C3B74B80033E2E6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDE2FEC1C3B74B80033E2E6 /* WebView.swift */; };
 		81FC12690E0955630F8CA490 /* Pods_Instarant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBD276F01D077DB03009A06 /* Pods_Instarant.framework */; };
+		95015A941E407270002DBEFA /* InstagramAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A931E407270002DBEFA /* InstagramAPI2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		3B920CA31C2A6F67004860F0 /* KaushanScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KaushanScript-Regular.ttf"; sourceTree = "<group>"; };
 		3B920CA51C30AD0F004860F0 /* placeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = placeModel.swift; sourceTree = "<group>"; };
 		3BDE2FEC1C3B74B80033E2E6 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		95015A931E407270002DBEFA /* InstagramAPI2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAPI2.swift; sourceTree = "<group>"; };
 		DAEDDD39CCDDA561E9C6FE2E /* Pods-Instarant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instarant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instarant/Pods-Instarant.debug.xcconfig"; sourceTree = "<group>"; };
 		ECBD276F01D077DB03009A06 /* Pods_Instarant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instarant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -193,6 +195,7 @@
 			children = (
 				3B12DA3E1C28CA240053F14F /* FoursquareAPI.swift */,
 				3B9205881C28E36D004860F0 /* InstagramAPI.swift */,
+				95015A931E407270002DBEFA /* InstagramAPI2.swift */,
 			);
 			name = APIs;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				TargetAttributes = {
 					3B12DA061C280C8A0053F14F = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 3NH3M673PL;
 						LastSwiftMigration = 0820;
 					};
 					3B12DA1A1C280C8A0053F14F = {
@@ -491,7 +495,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -509,6 +513,7 @@
 				3B12DA3F1C28CA240053F14F /* FoursquareAPI.swift in Sources */,
 				3B9205891C28E36D004860F0 /* InstagramAPI.swift in Sources */,
 				3B920C6A1C290989004860F0 /* InstagramLocation.m in Sources */,
+				95015A941E407270002DBEFA /* InstagramAPI2.swift in Sources */,
 				3B12DA0D1C280C8A0053F14F /* ViewController.swift in Sources */,
 				3B12DA0B1C280C8A0053F14F /* AppDelegate.swift in Sources */,
 				3B920CA61C30AD0F004860F0 /* placeModel.swift in Sources */,
@@ -662,6 +667,7 @@
 			baseConfigurationReference = DAEDDD39CCDDA561E9C6FE2E /* Pods-Instarant.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3NH3M673PL;
 				INFOPLIST_FILE = Instarant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdd.Instarant;
@@ -676,6 +682,7 @@
 			baseConfigurationReference = 16B6FB9406B62FAAD0532745 /* Pods-Instarant.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3NH3M673PL;
 				INFOPLIST_FILE = Instarant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdd.Instarant;

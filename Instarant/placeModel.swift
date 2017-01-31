@@ -11,7 +11,7 @@ import UIKit
 class placeModel {
     
     var InstagramLocationInfo:InstagramLocation!
-    var FoursquareID:NSString!
+    var FoursquareID:String!
     var FoursquareInfo:NSDictionary!
     var MediaArray:NSMutableArray!
     var geopoint: CLLocationCoordinate2D?
