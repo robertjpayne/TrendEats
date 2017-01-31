@@ -43,7 +43,7 @@ class FoursquareAPI: UIViewController {
                         let items = json["response"]["groups"][0]["items"]
                         
                         for (key, item) in items {
-                            print(item["venue"])
+                            print(item["venue"]["name"])
                             if let id = item["venue"]["id"].string {
                                 let place = placeModel()
                                 place.FoursquareID = id
