@@ -33,42 +33,19 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     enum errorThrows:Error {
         case generic
     }
-
-    var cache = NSCache<AnyObject, AnyObject>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        checkForConnection()
         downloadData()
-
-
     }
-
-    
-    
-    
-//    func checkForConnection() {
-//        
-//        //TODO: Need to address case where device may be connected to a wifi network where an access code is needed. The following Reachability method only checks for an active connection, but does not actually test the connection.
-//        
-//        if NetworkFunctions.Reachability.isConnectedToNetwork() {
-//            
-//            downloadData()
-//
-//        } else {
-//            
-//            let alertView = SCLAlertView()
-//            alertView.addButton("Retry", target:self, selector:Selector("checkForConnection"))
-//            alertView.showError("", subTitle: "No internet connection")
-//            
-//        }
-//        
-//    }
-//   
-    
     
     func downloadData() {
+        
+        //Reachability
+        if currentReachabilityStatus == .notReachable {
+            return
+        }
         
         //Show progress spinning wheel (not using GCD here since there's nothing yet to interact with at this point).
         MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -163,6 +140,31 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
+    func isSelfPost(media:InstagramMedia) {
+        //TODO: The username is not in the payload that we receive, so one option is to make another network call, expect we can't have the whole app wait on that before continuing. The other option would that when we make our inital query for the location place, there is a high likelyhood that the owner's account(s) will show up, we could save those ids and then exclude any media that has them.
+        
+        
+        
+//        need to filter out "self-posts" from the restaurant itself.
+//        let user = media.user as InstagramUser
+//        let userName = user.username
+//        print(userName)
+//        var index1 = userName?.index(userName?.startIndex, offsetBy: 0)
+//        if userName?.characters.count < 4 {
+//           index1 = userName.index(userName.startIndex, offsetBy: 2)
+//        } else {
+//            index1 = userName.index(userName.startIndex, offsetBy: 4)
+//        }
+//        var truncatedUsername = userName.substringToIndex(index1).lowercased()
+//        let locationName = object.locationName.lowercased()
+//        if locationName.contains(truncatedUsername) {
+//            print("\(userName) posted about their own place: \(locationName) and we've removed their post")
+//            
+//        } else {
+//           combo.add(object)
+//        }
+    }
+    
     func downloadErrorShow(){
         let alertView = SCLAlertView()
         alertView.addButton("Retry", target:self, selector:Selector("downloadData"))
@@ -196,21 +198,9 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    
-    
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        
-        print("setting up table")
-        
-        return 1
-    }
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return self.places.count
+        return self.sortedPlaces.count
     
     }
     
@@ -231,9 +221,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         if self.places.count < 1 {
             return cell
         }
-        //let mediaPacket = mediaArrayAll.objectAtIndex(indexPath.row) as! NSArray
-//        let placesExp = NSMutableArray(array: self.places)
-//        let particularPlace:placeModel = placesExp[indexPath.row] as! placeModel
+
         let particularPlace = sortedPlaces[indexPath.row].value
         let mediaArray = particularPlace.media
         var index:CGFloat = -1

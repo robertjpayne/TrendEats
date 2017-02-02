@@ -16,7 +16,6 @@
 		3B12DA2B1C280C8A0053F14F /* InstarantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B12DA2A1C280C8A0053F14F /* InstarantUITests.swift */; };
 		3B12DA391C280E9A0053F14F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B12DA381C280E9A0053F14F /* Constants.swift */; };
 		3B12DA3F1C28CA240053F14F /* FoursquareAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B12DA3E1C28CA240053F14F /* FoursquareAPI.swift */; };
-		3B7DC0731C38537D00A0BE05 /* NetworkFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7DC0721C38537D00A0BE05 /* NetworkFunctions.swift */; };
 		3B9205891C28E36D004860F0 /* InstagramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9205881C28E36D004860F0 /* InstagramAPI.swift */; };
 		3B920C671C290989004860F0 /* InstagramEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B920C541C290989004860F0 /* InstagramEngine.m */; };
 		3B920C681C290989004860F0 /* InstagramKitConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B920C571C290989004860F0 /* InstagramKitConstants.m */; };
@@ -33,7 +32,6 @@
 		3B920CA61C30AD0F004860F0 /* placeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B920CA51C30AD0F004860F0 /* placeModel.swift */; };
 		3BDE2FED1C3B74B80033E2E6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDE2FEC1C3B74B80033E2E6 /* WebView.swift */; };
 		81FC12690E0955630F8CA490 /* Pods_Instarant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBD276F01D077DB03009A06 /* Pods_Instarant.framework */; };
-		95015A941E407270002DBEFA /* InstagramAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A931E407270002DBEFA /* InstagramAPI2.swift */; };
 		95015A991E42B2D5002DBEFA /* InstagramMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A971E42B2D5002DBEFA /* InstagramMedia.swift */; };
 		95015A9A1E42B2D5002DBEFA /* InstagramUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A981E42B2D5002DBEFA /* InstagramUser.swift */; };
 		95015A9C1E42B2E9002DBEFA /* InstagramPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A9B1E42B2E9002DBEFA /* InstagramPlace.swift */; };
@@ -41,6 +39,7 @@
 		95015AA01E42C3DC002DBEFA /* NetworkCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A9F1E42C3DC002DBEFA /* NetworkCalls.swift */; };
 		95015AA31E42C57C002DBEFA /* GlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015AA21E42C57C002DBEFA /* GlobalVars.swift */; };
 		95015AA61E42E97B002DBEFA /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015AA51E42E97B002DBEFA /* UIImageView+Extensions.swift */; };
+		95015AA81E430840002DBEFA /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015AA71E430840002DBEFA /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +77,6 @@
 		3B12DA2C1C280C8A0053F14F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B12DA381C280E9A0053F14F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3B12DA3E1C28CA240053F14F /* FoursquareAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursquareAPI.swift; sourceTree = "<group>"; };
-		3B7DC0721C38537D00A0BE05 /* NetworkFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkFunctions.swift; sourceTree = "<group>"; };
 		3B9205881C28E36D004860F0 /* InstagramAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAPI.swift; sourceTree = "<group>"; };
 		3B920C531C290989004860F0 /* InstagramEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramEngine.h; sourceTree = "<group>"; };
 		3B920C541C290989004860F0 /* InstagramEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngine.m; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 		3B920CA31C2A6F67004860F0 /* KaushanScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KaushanScript-Regular.ttf"; sourceTree = "<group>"; };
 		3B920CA51C30AD0F004860F0 /* placeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = placeModel.swift; sourceTree = "<group>"; };
 		3BDE2FEC1C3B74B80033E2E6 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		95015A931E407270002DBEFA /* InstagramAPI2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAPI2.swift; sourceTree = "<group>"; };
 		95015A971E42B2D5002DBEFA /* InstagramMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramMedia.swift; sourceTree = "<group>"; };
 		95015A981E42B2D5002DBEFA /* InstagramUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramUser.swift; sourceTree = "<group>"; };
 		95015A9B1E42B2E9002DBEFA /* InstagramPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramPlace.swift; sourceTree = "<group>"; };
@@ -113,6 +110,7 @@
 		95015A9F1E42C3DC002DBEFA /* NetworkCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCalls.swift; sourceTree = "<group>"; };
 		95015AA21E42C57C002DBEFA /* GlobalVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVars.swift; sourceTree = "<group>"; };
 		95015AA51E42E97B002DBEFA /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		95015AA71E430840002DBEFA /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		DAEDDD39CCDDA561E9C6FE2E /* Pods-Instarant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instarant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instarant/Pods-Instarant.debug.xcconfig"; sourceTree = "<group>"; };
 		ECBD276F01D077DB03009A06 /* Pods_Instarant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instarant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -210,7 +208,6 @@
 			children = (
 				3B12DA3E1C28CA240053F14F /* FoursquareAPI.swift */,
 				3B9205881C28E36D004860F0 /* InstagramAPI.swift */,
-				95015A931E407270002DBEFA /* InstagramAPI2.swift */,
 			);
 			name = APIs;
 			sourceTree = "<group>";
@@ -298,7 +295,7 @@
 			children = (
 				95015AA11E42C3E2002DBEFA /* From TagTrend */,
 				3B920C731C292D53004860F0 /* LocationFunctions.swift */,
-				3B7DC0721C38537D00A0BE05 /* NetworkFunctions.swift */,
+				95015AA71E430840002DBEFA /* Utilities.swift */,
 			);
 			name = "Utility Functions";
 			sourceTree = "<group>";
@@ -555,14 +552,13 @@
 				3B9205891C28E36D004860F0 /* InstagramAPI.swift in Sources */,
 				3B920C6A1C290989004860F0 /* InstagramLocation.m in Sources */,
 				95015A9C1E42B2E9002DBEFA /* InstagramPlace.swift in Sources */,
-				95015A941E407270002DBEFA /* InstagramAPI2.swift in Sources */,
 				3B12DA0D1C280C8A0053F14F /* ViewController.swift in Sources */,
+				95015AA81E430840002DBEFA /* Utilities.swift in Sources */,
 				95015AA01E42C3DC002DBEFA /* NetworkCalls.swift in Sources */,
 				3B12DA0B1C280C8A0053F14F /* AppDelegate.swift in Sources */,
 				95015AA31E42C57C002DBEFA /* GlobalVars.swift in Sources */,
 				3B920CA61C30AD0F004860F0 /* placeModel.swift in Sources */,
 				3B920C741C292D53004860F0 /* LocationFunctions.swift in Sources */,
-				3B7DC0731C38537D00A0BE05 /* NetworkFunctions.swift in Sources */,
 				3B920C681C290989004860F0 /* InstagramKitConstants.m in Sources */,
 				3B920C6E1C290989004860F0 /* InstagramTag.m in Sources */,
 				3B920C801C295B1E004860F0 /* NearbyScrollView.swift in Sources */,
@@ -714,7 +710,7 @@
 				DEVELOPMENT_TEAM = 3NH3M673PL;
 				INFOPLIST_FILE = Instarant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdd.Instarant;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Dunaetz.TrendEats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Instarant/BridgingHeader.h;
 				SWIFT_VERSION = 3.0;
@@ -729,7 +725,7 @@
 				DEVELOPMENT_TEAM = 3NH3M673PL;
 				INFOPLIST_FILE = Instarant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdd.Instarant;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Dunaetz.TrendEats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Instarant/BridgingHeader.h;
 				SWIFT_VERSION = 3.0;
