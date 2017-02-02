@@ -71,7 +71,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     func downloadData() {
         
         //Show progress spinning wheel (not using GCD here since there's nothing yet to interact with at this point).
-//        MBProgressHUD.showAdded(to: self.view, animated: true)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         
         
         LocationFunctions.getCoordinates { (location, success) -> Void in
@@ -116,35 +116,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                         
                     }
                     
-//                     InstagramAPI.getLocationWithGeopoint(newPlace.geopoint!) { (result, success) in
-//                    
-////                    InstagramAPI.getInstagramLocationFromFoursquareID(newPlace.FoursquareID as String, location: newPlace.geopoint!, completion: { (result) -> Void in
-//                        guard let particularLocation:InstagramLocation = result else {
-//                            return
-//                        }
-//                        //Save the InstagramLocation
-//                        newPlace.InstagramLocationInfo = particularLocation
-//                          print("newPlace.InstagramLocationInfo: \(newPlace.InstagramLocationInfo.name)")
-//                        
-//                        InstagramAPI.getRecentPhotosFromLocation(particularLocation, nextPageID:nil,previousPhotoSet:[], completion: { (result) -> Void in
-//                            
-//                          newPlace.MediaArray.addObjects(from: result as [AnyObject])
-//                            self.places.append(newPlace)
-//                            print("There are now \(newPlace.MediaArray.count) photos of \(newPlace.InstagramLocationInfo.name)")
-//                            
-//                            
-//                            //TODO: Issues with this: We reload every time a restaurant is completed, but it's hard to tell when we're on the last restaurant, because they come back up the line asynchronously and some that don't have any pictures won't come through at all.
-//                                self.sortPlaces()
-//                            
-//                            
-//                           
-//                            
-//                        })//end getRecentPhotosFromLocation
-//                        
-//                    }//end getLocation with geopoint
-                    
                 }//end for loop
-
                 
             }//end FoursquareAPI.getNearbyRestaurantIDs
             
@@ -162,13 +134,10 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         var url = "https://www.instagram.com/explore/locations/\(locationID)/?__a=1"
         if let maxID = places[locationID]?.media.last?.id {
             url += "&max_id=\(maxID)"
-            
         }
 
         easyCall2(url: url){ (json) in
-            guard let photos = json["location"]["media"]["nodes"].array else {
-                
-                return}
+            guard let photos = json["location"]["media"]["nodes"].array else {return}
 
             var batchToAppend = [InstagramMedia]()
             for photo in photos {
@@ -180,9 +149,12 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
 
             }
             //If we've reached the last page, the batchToAppend should be empty so that's when we know to stop.
+            //NOTE: This is by far the most complex part of the app, so I think it warrants a deep dive explanation: This function will keep calling itself until it comes back with an entire 12 node array or all pics that are older than the desired date. This happens because on the last page, the max_id that we send out will already be at the limit, meaning that everything that comes back on the next page will be too old. So we just check to see if the batchToAppend == 0 and if so, we end the recursion.
             if batchToAppend.count == 0 {
-                print("we have reached the end")
+                //We have reached the end
+                self.sortPlaces()
             } else {
+                //Keep getting next page.
                 self.places[locationID]?.media += batchToAppend
                 self.recursivePageFetch(locationID: locationID, completion: nil)
             }
@@ -198,9 +170,6 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
 
     }
-    @IBAction func manualAction(_ sender: Any) {
-        sortPlaces()
-    }
     
     func sortPlaces(){
         
@@ -214,21 +183,6 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
 
         MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         self.tableView.reloadData()
-        
-//        self.places.sort(by: { $0.MediaArray.count > $1.MediaArray.count  })
-//        
-//        print("after sort:")
-//        for place in self.places  {
-//            guard let place:placeModel = place else {
-//                return
-//            }
-//            print(String(place.InstagramLocationInfo.name) + " media: " + String(place.MediaArray.count))
-//            
-//        }
-//        self.currentCityLabel.text = "Restaurants near \(self.cityOfUser)."
-//
-//        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-//        self.tableView.reloadData()
     }
     
     
