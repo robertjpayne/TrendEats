@@ -34,6 +34,13 @@
 		3BDE2FED1C3B74B80033E2E6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDE2FEC1C3B74B80033E2E6 /* WebView.swift */; };
 		81FC12690E0955630F8CA490 /* Pods_Instarant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBD276F01D077DB03009A06 /* Pods_Instarant.framework */; };
 		95015A941E407270002DBEFA /* InstagramAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A931E407270002DBEFA /* InstagramAPI2.swift */; };
+		95015A991E42B2D5002DBEFA /* InstagramMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A971E42B2D5002DBEFA /* InstagramMedia.swift */; };
+		95015A9A1E42B2D5002DBEFA /* InstagramUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A981E42B2D5002DBEFA /* InstagramUser.swift */; };
+		95015A9C1E42B2E9002DBEFA /* InstagramPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A9B1E42B2E9002DBEFA /* InstagramPlace.swift */; };
+		95015A9E1E42C3A9002DBEFA /* EasyCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A9D1E42C3A9002DBEFA /* EasyCall.swift */; };
+		95015AA01E42C3DC002DBEFA /* NetworkCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015A9F1E42C3DC002DBEFA /* NetworkCalls.swift */; };
+		95015AA31E42C57C002DBEFA /* GlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015AA21E42C57C002DBEFA /* GlobalVars.swift */; };
+		95015AA61E42E97B002DBEFA /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015AA51E42E97B002DBEFA /* UIImageView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +106,13 @@
 		3B920CA51C30AD0F004860F0 /* placeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = placeModel.swift; sourceTree = "<group>"; };
 		3BDE2FEC1C3B74B80033E2E6 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		95015A931E407270002DBEFA /* InstagramAPI2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAPI2.swift; sourceTree = "<group>"; };
+		95015A971E42B2D5002DBEFA /* InstagramMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramMedia.swift; sourceTree = "<group>"; };
+		95015A981E42B2D5002DBEFA /* InstagramUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramUser.swift; sourceTree = "<group>"; };
+		95015A9B1E42B2E9002DBEFA /* InstagramPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramPlace.swift; sourceTree = "<group>"; };
+		95015A9D1E42C3A9002DBEFA /* EasyCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyCall.swift; sourceTree = "<group>"; };
+		95015A9F1E42C3DC002DBEFA /* NetworkCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCalls.swift; sourceTree = "<group>"; };
+		95015AA21E42C57C002DBEFA /* GlobalVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVars.swift; sourceTree = "<group>"; };
+		95015AA51E42E97B002DBEFA /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		DAEDDD39CCDDA561E9C6FE2E /* Pods-Instarant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instarant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instarant/Pods-Instarant.debug.xcconfig"; sourceTree = "<group>"; };
 		ECBD276F01D077DB03009A06 /* Pods_Instarant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instarant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -155,6 +169,7 @@
 		3B12DA091C280C8A0053F14F /* Instarant */ = {
 			isa = PBXGroup;
 			children = (
+				95015AA41E42E971002DBEFA /* Extensions */,
 				3B920C9F1C2A6DFF004860F0 /* View Controllers */,
 				3B920CA11C2A6F4A004860F0 /* Resources */,
 				3B12DA401C28CB6E0053F14F /* APIs */,
@@ -253,7 +268,10 @@
 		3B920C751C293184004860F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				95015A971E42B2D5002DBEFA /* InstagramMedia.swift */,
+				95015A981E42B2D5002DBEFA /* InstagramUser.swift */,
 				3B920CA51C30AD0F004860F0 /* placeModel.swift */,
+				95015A9B1E42B2E9002DBEFA /* InstagramPlace.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -278,6 +296,7 @@
 		3B920CA01C2A6E24004860F0 /* Utility Functions */ = {
 			isa = PBXGroup;
 			children = (
+				95015AA11E42C3E2002DBEFA /* From TagTrend */,
 				3B920C731C292D53004860F0 /* LocationFunctions.swift */,
 				3B7DC0721C38537D00A0BE05 /* NetworkFunctions.swift */,
 			);
@@ -307,6 +326,24 @@
 				ECBD276F01D077DB03009A06 /* Pods_Instarant.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		95015AA11E42C3E2002DBEFA /* From TagTrend */ = {
+			isa = PBXGroup;
+			children = (
+				95015AA21E42C57C002DBEFA /* GlobalVars.swift */,
+				95015A9D1E42C3A9002DBEFA /* EasyCall.swift */,
+				95015A9F1E42C3DC002DBEFA /* NetworkCalls.swift */,
+			);
+			name = "From TagTrend";
+			sourceTree = "<group>";
+		};
+		95015AA41E42E971002DBEFA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				95015AA51E42E97B002DBEFA /* UIImageView+Extensions.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		DA386702EB4ED243369AD6A4 /* Pods */ = {
@@ -508,14 +545,21 @@
 				3B920C6D1C290989004860F0 /* InstagramPaginationInfo.m in Sources */,
 				3BDE2FED1C3B74B80033E2E6 /* WebView.swift in Sources */,
 				3B920C6F1C290989004860F0 /* InstagramUser.m in Sources */,
+				95015AA61E42E97B002DBEFA /* UIImageView+Extensions.swift in Sources */,
+				95015A9A1E42B2D5002DBEFA /* InstagramUser.swift in Sources */,
 				3B920C6C1C290989004860F0 /* InstagramModel.m in Sources */,
 				3B920C671C290989004860F0 /* InstagramEngine.m in Sources */,
+				95015A991E42B2D5002DBEFA /* InstagramMedia.swift in Sources */,
 				3B12DA3F1C28CA240053F14F /* FoursquareAPI.swift in Sources */,
+				95015A9E1E42C3A9002DBEFA /* EasyCall.swift in Sources */,
 				3B9205891C28E36D004860F0 /* InstagramAPI.swift in Sources */,
 				3B920C6A1C290989004860F0 /* InstagramLocation.m in Sources */,
+				95015A9C1E42B2E9002DBEFA /* InstagramPlace.swift in Sources */,
 				95015A941E407270002DBEFA /* InstagramAPI2.swift in Sources */,
 				3B12DA0D1C280C8A0053F14F /* ViewController.swift in Sources */,
+				95015AA01E42C3DC002DBEFA /* NetworkCalls.swift in Sources */,
 				3B12DA0B1C280C8A0053F14F /* AppDelegate.swift in Sources */,
+				95015AA31E42C57C002DBEFA /* GlobalVars.swift in Sources */,
 				3B920CA61C30AD0F004860F0 /* placeModel.swift in Sources */,
 				3B920C741C292D53004860F0 /* LocationFunctions.swift in Sources */,
 				3B7DC0731C38537D00A0BE05 /* NetworkFunctions.swift in Sources */,

@@ -15,6 +15,8 @@ class placeModel {
     var FoursquareInfo:NSDictionary!
     var MediaArray:NSMutableArray!
     var geopoint: CLLocationCoordinate2D?
+    var city:String?
+    var name:String?
     
 
 }

@@ -43,7 +43,7 @@ class FoursquareAPI: UIViewController {
                         let items = json["response"]["groups"][0]["items"]
                         
                         for (key, item) in items {
-                            print(item["venue"]["name"])
+                            print(item["venue"])
                             if let id = item["venue"]["id"].string {
                                 let place = placeModel()
                                 place.FoursquareID = id
@@ -53,6 +53,9 @@ class FoursquareAPI: UIViewController {
                                         place.geopoint = CLLocationCoordinate2DMake(lat,lon)
                                     }
                                 }
+                                place.city = item["venue"]["location"]["city"].string
+                                place.name = item["venue"]["name"].string
+
                                 //idsArray.addObject(id)
                                 foursquareArray.add(place)
                                 

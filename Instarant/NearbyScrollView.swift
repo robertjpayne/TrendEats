@@ -22,12 +22,13 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     
     var mediaArrayAll = NSMutableArray()
     
-    var places: [placeModel] = []
+    var places = [Int:InstagramPlace]()
     
     var URLtoSendToWebView = ""
     
     var cityOfUser = ""
 
+    var sortedPlaces = [(key:Int, value:InstagramPlace)]()
     
     enum errorThrows:Error {
         case generic
@@ -68,7 +69,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     func downloadData() {
         
         //Show progress spinning wheel (not using GCD here since there's nothing yet to interact with at this point).
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+//        MBProgressHUD.showAdded(to: self.view, animated: true)
         
         
         LocationFunctions.getCoordinates { (location, success) -> Void in
@@ -101,10 +102,16 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 //Start of the individual lookup process
                 for object in foursquareArray {
                     
-                    
-//                    //Init a new placeModel
+                    //Init a new placeModel
                     guard let newPlace:placeModel = object as! placeModel else {return}
-                    newPlace.MediaArray = []
+                    
+                    NetworkCalls.sharedInstance.getBestLocationIDforQueryTerm(queryTerm: newPlace.city! + " "  + newPlace.name!) { (locationID:String) in
+                       print(locationID)
+                        let newInstagramPlace = InstagramPlace()
+                        self.places[Int(locationID)!] = newInstagramPlace
+                        self.recursivePageFetch(locationID: Int(locationID)!, completion: nil)
+                        
+                    }
                     
 //                     InstagramAPI.getLocationWithGeopoint(newPlace.geopoint!) { (result, success) in
 //                    
@@ -142,7 +149,46 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
 
     }//end downloadData2
    
+    func topDishesViaInstagram(queryTermForRestaurant:String/*, completion:@escaping ([InstagramMedia])->Void*/){
+        
+        
+    }
+    
 
+    func recursivePageFetch(locationID:Int, completion: (()->Void)?  ) {
+        var url = "https://www.instagram.com/explore/locations/\(locationID)/?__a=1"
+        if let maxID = places[locationID]?.id {
+            url += "&max_id=\(maxID)"
+        }
+
+        easyCall2(url: url){ (json) in
+            guard let photos = json["location"]["media"]["nodes"].array else {return}
+            
+            //If we've reached the last page:
+            if photos.count == 0 {
+//                self.printSavedResult()
+                return
+            }
+            
+            for photo in photos {
+                let media = InstagramMedia(json: photo, tagPrimary: nil)
+                let interval = Constants.oldestDateToLookFor.timeIntervalSince(media.date!)
+//                if interval < 0 {
+//                    
+//                }
+                self.places[locationID]?.media.append(media)
+            }
+
+            guard let lastDate = self.places[locationID]?.media.last?.date else {return}
+            let lastInterval = Constants.oldestDateToLookFor.timeIntervalSince(lastDate)
+            if lastInterval < 0 && (self.places[locationID]?.media.count)! < 30 {
+               self.recursivePageFetch(locationID: locationID, completion: nil)
+            } else {
+                print("we have reached the end")
+            }
+            
+        }
+    }
     
     func downloadErrorShow(){
         let alertView = SCLAlertView()
@@ -151,24 +197,37 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
 
     }
+    @IBAction func manualAction(_ sender: Any) {
+        sortPlaces()
+    }
     
     func sortPlaces(){
         
-        
-        self.places.sort(by: { $0.MediaArray.count > $1.MediaArray.count  })
-        
-        print("after sort:")
-        for place in self.places  {
-            guard let place:placeModel = place else {
-                return
-            }
-            print(String(place.InstagramLocationInfo.name) + " media: " + String(place.MediaArray.count))
-            
+        sortedPlaces = places.sorted(by: { (a, b) in (a.value.media.count) > (b.value.media.count) })
+        for place in sortedPlaces {
+           let count = place.value.media.count
+            print(count)
         }
+        
         self.currentCityLabel.text = "Restaurants near \(self.cityOfUser)."
 
         MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         self.tableView.reloadData()
+        
+//        self.places.sort(by: { $0.MediaArray.count > $1.MediaArray.count  })
+//        
+//        print("after sort:")
+//        for place in self.places  {
+//            guard let place:placeModel = place else {
+//                return
+//            }
+//            print(String(place.InstagramLocationInfo.name) + " media: " + String(place.MediaArray.count))
+//            
+//        }
+//        self.currentCityLabel.text = "Restaurants near \(self.cityOfUser)."
+//
+//        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+//        self.tableView.reloadData()
     }
     
     
@@ -218,14 +277,15 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
             return cell
         }
         //let mediaPacket = mediaArrayAll.objectAtIndex(indexPath.row) as! NSArray
-        let placesExp = NSMutableArray(array: self.places)
-        let particularPlace:placeModel = placesExp[indexPath.row] as! placeModel
-        let mediaArray = particularPlace.MediaArray as NSMutableArray
+//        let placesExp = NSMutableArray(array: self.places)
+//        let particularPlace:placeModel = placesExp[indexPath.row] as! placeModel
+        let particularPlace = sortedPlaces[indexPath.row].value
+        let mediaArray = particularPlace.media
         var index:CGFloat = -1
         
         
         //Set labels:
-        label1.text = " \(particularPlace.InstagramLocationInfo.name.uppercased())"
+        label1.text = " \(particularPlace.name.uppercased())"
         labelBigNumber.text = "\(mediaArray.count)"
         labelTimeFrame.text = "Instagram posts in the last \(Constants.numberOfDaysToSearchForPosts) days."
         
@@ -246,19 +306,9 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 imageView.contentMode = .scaleAspectFill
                 
                 
-                
-                //Swift Image loader:
-                let URL = photoClone.thumbnailURL
-                print("url for image =\(URL)at this location:\(photoClone.locationName)")
-//                imageView.load(URL, placeholder: nil, completionHandler: { (URL, image, error, cacheType) -> Void in
-//                    if cacheType == CacheType.None {
-//                        let transition = CATransition()
-//                        transition.duration = 0.5
-//                        transition.type = kCATransitionFade
-//                        imageView.layer.addAnimation(transition, forKey: nil)
-//                        imageView.image = image
-//                    }
-//                })
+                imageView.loadImageInBackgroundWithCompletion(photoClone.display_src!, showActivityIndicator: true, completion: { (image) in
+                    
+                })
 
                 let scroll1Subviews = scroll1.subviews
                 if index == 0 {
@@ -287,8 +337,8 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         
         //Set the contentSize to fit all the pictures in the media Packet.
         scroll1.contentSize = CGSize(width: imageWidth * CGFloat(mediaArray.count), height: scroll1.frame.height)
-
-        
+//
+//        
                 return cell
     }
     
@@ -297,31 +347,31 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
 
     func imageTapped(_ sender:UIButton){
         
-        print("\(sender.tag)")
-        
-        let row = (sender.tag-1)/10000
-        
-        let particularLocation = places[row - 1]
-        
-        let column = (sender.tag % 1000)-1
-        
-        print("column: \(column)")
-        print("array size: \(particularLocation.MediaArray.count)")
-        if particularLocation.MediaArray.count <= column {
-            return
-        }
-        
-        guard let instaPic:InstagramMedia = particularLocation.MediaArray[column] as? InstagramMedia else {
-            return
-        }
-        
-        URLtoSendToWebView = instaPic.link
-        
-        self.performSegue(withIdentifier: "s1", sender: self)
-        
-        print(particularLocation.InstagramLocationInfo.name)
-        print(column)
-        
+//        print("\(sender.tag)")
+//        
+//        let row = (sender.tag-1)/10000
+//        
+//        let particularLocation = places[row - 1]
+//        
+//        let column = (sender.tag % 1000)-1
+//        
+//        print("column: \(column)")
+//        print("array size: \(particularLocation.MediaArray.count)")
+//        if particularLocation.MediaArray.count <= column {
+//            return
+//        }
+//        
+//        guard let instaPic:InstagramMedia = particularLocation.MediaArray[column] as? InstagramMedia else {
+//            return
+//        }
+//        
+//        URLtoSendToWebView = instaPic.link
+//        
+//        self.performSegue(withIdentifier: "s1", sender: self)
+//        
+//        print(particularLocation.InstagramLocationInfo.name)
+//        print(column)
+//        
         
     }
     
