@@ -34,6 +34,8 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         case generic
     }
 
+    var cache = NSCache<AnyObject, AnyObject>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -164,30 +166,27 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         }
 
         easyCall2(url: url){ (json) in
-            guard let photos = json["location"]["media"]["nodes"].array else {return}
-            
-            //If we've reached the last page:
-            if photos.count == 0 {
-//                self.printSavedResult()
-                return
-            }
-            
+            guard let photos = json["location"]["media"]["nodes"].array else {
+                
+                return}
+
+            var batchToAppend = [InstagramMedia]()
             for photo in photos {
                 let media = InstagramMedia(json: photo, tagPrimary: nil)
                 let interval = Constants.oldestDateToLookFor.timeIntervalSince(media.date!)
-//                if interval < 0 {
-//                    
-//                }
-                self.places[locationID]?.media.append(media)
-            }
+                if interval < 0 {
+                    batchToAppend.append(media)
+                }
 
-            guard let lastDate = self.places[locationID]?.media.last?.date else {return}
-            let lastInterval = Constants.oldestDateToLookFor.timeIntervalSince(lastDate)
-            if lastInterval < 0 && (self.places[locationID]?.media.count)! < 30 {
-               self.recursivePageFetch(locationID: locationID, completion: nil)
-            } else {
-                print("we have reached the end")
             }
+            //If we've reached the last page, the batchToAppend should be empty so that's when we know to stop.
+            if batchToAppend.count == 0 {
+                print("we have reached the end")
+            } else {
+                self.places[locationID]?.media += batchToAppend
+                self.recursivePageFetch(locationID: locationID, completion: nil)
+            }
+            
             
         }
     }
@@ -308,9 +307,21 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 imageView.contentMode = .scaleAspectFill
                 
                 
-                imageView.loadImageInBackgroundWithCompletion(photoClone.display_src!, showActivityIndicator: true, completion: { (image) in
+                //Image caching and displaying
+                let title = photoClone.display_src!
+                if let cachedImage = cache.object(forKey: title as AnyObject) {
+                    imageView.image = cachedImage as! UIImage
+                } else {
+                    imageView.loadImageInBackgroundWithCompletion(photoClone.display_src!, showActivityIndicator: true, completion: { (image) in
+                        if let value: AnyObject = image {
+                            self.cache.setObject(value, forKey: title as AnyObject)
+                        } else {
+                            self.cache.removeObject(forKey: title as AnyObject)
+                        }
+                    })
                     
-                })
+                }
+
 
                 let scroll1Subviews = scroll1.subviews
                 if index == 0 {
