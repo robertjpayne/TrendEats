@@ -158,8 +158,9 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
 
     func recursivePageFetch(locationID:Int, completion: (()->Void)?  ) {
         var url = "https://www.instagram.com/explore/locations/\(locationID)/?__a=1"
-        if let maxID = places[locationID]?.id {
+        if let maxID = places[locationID]?.media.last?.id {
             url += "&max_id=\(maxID)"
+            
         }
 
         easyCall2(url: url){ (json) in
