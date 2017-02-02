@@ -261,21 +261,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 imageView.contentMode = .scaleAspectFill
                 
                 
-                //Image caching and displaying
-                let title = photoClone.display_src!
-                if let cachedImage = cache.object(forKey: title as AnyObject) {
-                    imageView.image = cachedImage as! UIImage
-                } else {
-                    imageView.loadImageInBackgroundWithCompletion(photoClone.display_src!, showActivityIndicator: true, completion: { (image) in
-                        if let value: AnyObject = image {
-                            self.cache.setObject(value, forKey: title as AnyObject)
-                        } else {
-                            self.cache.removeObject(forKey: title as AnyObject)
-                        }
-                    })
-                    
-                }
-
+                imageView.loadImageInBackgroundWithCompletion(photoClone.display_src!, showActivityIndicator: true){_ in }
 
                 let scroll1Subviews = scroll1.subviews
                 if index == 0 {
@@ -314,31 +300,28 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
 
     func imageTapped(_ sender:UIButton){
         
-//        print("\(sender.tag)")
-//        
-//        let row = (sender.tag-1)/10000
-//        
-//        let particularLocation = places[row - 1]
-//        
-//        let column = (sender.tag % 1000)-1
-//        
-//        print("column: \(column)")
+        print("\(sender.tag)")
+        
+        let row = (sender.tag-1)/10000
+        
+        let particularLocation = sortedPlaces[row - 1].value
+        
+        let column = (sender.tag % 1000)-1
+        
+        print("column: \(column)")
 //        print("array size: \(particularLocation.MediaArray.count)")
-//        if particularLocation.MediaArray.count <= column {
-//            return
-//        }
-//        
-//        guard let instaPic:InstagramMedia = particularLocation.MediaArray[column] as? InstagramMedia else {
-//            return
-//        }
-//        
-//        URLtoSendToWebView = instaPic.link
-//        
-//        self.performSegue(withIdentifier: "s1", sender: self)
-//        
-//        print(particularLocation.InstagramLocationInfo.name)
-//        print(column)
-//        
+        if particularLocation.media.count <= column {
+            return
+        }
+        
+        guard let instaPic:InstagramMedia = particularLocation.media[column] as? InstagramMedia else {
+            return
+        }
+        
+        URLtoSendToWebView = instaPic.pageLink!
+        
+        self.performSegue(withIdentifier: "s1", sender: self)
+        
         
     }
     

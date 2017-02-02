@@ -20,6 +20,10 @@ class InstagramMedia {
     var id:String?
     var date:Date?
     
+    var pageLink:String! {
+        return "https://www.instagram.com/p/\(self.code!)/"
+    }
+    
     var tagPrimary:String?
         
     init(json:JSON, tagPrimary:String?){
