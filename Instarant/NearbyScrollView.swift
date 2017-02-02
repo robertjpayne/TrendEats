@@ -108,6 +108,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                     NetworkCalls.sharedInstance.getBestLocationIDforQueryTerm(queryTerm: newPlace.city! + " "  + newPlace.name!) { (locationID:String) in
                        print(locationID)
                         let newInstagramPlace = InstagramPlace()
+                        newInstagramPlace.name = newPlace.name!
                         self.places[Int(locationID)!] = newInstagramPlace
                         self.recursivePageFetch(locationID: Int(locationID)!, completion: nil)
                         
