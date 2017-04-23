@@ -40,6 +40,7 @@
 		95015AA31E42C57C002DBEFA /* GlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015AA21E42C57C002DBEFA /* GlobalVars.swift */; };
 		95015AA61E42E97B002DBEFA /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015AA51E42E97B002DBEFA /* UIImageView+Extensions.swift */; };
 		95015AA81E430840002DBEFA /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015AA71E430840002DBEFA /* Utilities.swift */; };
+		95266E6A1E441D57000F2160 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95266E691E441D57000F2160 /* FiltersViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		95015AA21E42C57C002DBEFA /* GlobalVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVars.swift; sourceTree = "<group>"; };
 		95015AA51E42E97B002DBEFA /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		95015AA71E430840002DBEFA /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		95266E691E441D57000F2160 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		DAEDDD39CCDDA561E9C6FE2E /* Pods-Instarant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instarant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instarant/Pods-Instarant.debug.xcconfig"; sourceTree = "<group>"; };
 		ECBD276F01D077DB03009A06 /* Pods_Instarant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instarant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -286,6 +288,7 @@
 			children = (
 				3B920C7F1C295B1E004860F0 /* NearbyScrollView.swift */,
 				3BDE2FEC1C3B74B80033E2E6 /* WebView.swift */,
+				95266E691E441D57000F2160 /* FiltersViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				95015A9A1E42B2D5002DBEFA /* InstagramUser.swift in Sources */,
 				3B920C6C1C290989004860F0 /* InstagramModel.m in Sources */,
 				3B920C671C290989004860F0 /* InstagramEngine.m in Sources */,
+				95266E6A1E441D57000F2160 /* FiltersViewController.swift in Sources */,
 				95015A991E42B2D5002DBEFA /* InstagramMedia.swift in Sources */,
 				3B12DA3F1C28CA240053F14F /* FoursquareAPI.swift in Sources */,
 				95015A9E1E42C3A9002DBEFA /* EasyCall.swift in Sources */,

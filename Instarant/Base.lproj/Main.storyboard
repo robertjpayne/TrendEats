@@ -59,7 +59,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cWA-6T-5oa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="724" y="264.91754122938534"/>
+            <point key="canvasLocation" x="897" y="-251"/>
         </scene>
         <!--Nearby Scroll View-->
         <scene sceneID="tne-QT-ifu">
@@ -170,8 +170,8 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hde-IV-5kr">
-                                <rect key="frame" x="36" y="55" width="303" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Hde-IV-5kr">
+                                <rect key="frame" x="75" y="56" width="224" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="vey-Qj-iJe"/>
                                 </constraints>
@@ -179,18 +179,26 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7v-Bt-75Z">
+                                <rect key="frame" x="13" y="28" width="24" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="settingsFilters"/>
+                                <connections>
+                                    <segue destination="OAc-7O-0Ql" kind="presentation" id="9Gw-cC-Fji"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="LFa-j1-uHM" firstAttribute="top" secondItem="Hde-IV-5kr" secondAttribute="bottom" constant="19" id="1Ao-EX-1RD"/>
+                            <constraint firstItem="LFa-j1-uHM" firstAttribute="top" secondItem="Hde-IV-5kr" secondAttribute="bottom" constant="18" id="1Ao-EX-1RD"/>
                             <constraint firstItem="LFa-j1-uHM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="2nC-bo-RRN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LFa-j1-uHM" secondAttribute="trailing" constant="-20" id="4fh-Rv-rGe"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LFa-j1-uHM" secondAttribute="bottom" id="Hii-TV-GyF"/>
                             <constraint firstItem="nhy-Je-mfe" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="J4X-51-H4V"/>
-                            <constraint firstItem="Hde-IV-5kr" firstAttribute="top" secondItem="nhy-Je-mfe" secondAttribute="bottom" constant="4" id="P7a-V1-RKs"/>
-                            <constraint firstItem="Hde-IV-5kr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="cV0-wd-tKi"/>
+                            <constraint firstItem="Hde-IV-5kr" firstAttribute="top" secondItem="nhy-Je-mfe" secondAttribute="bottom" constant="5" id="P7a-V1-RKs"/>
+                            <constraint firstItem="Hde-IV-5kr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="59" id="cV0-wd-tKi"/>
                             <constraint firstItem="nhy-Je-mfe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="89" id="ln2-FI-dzJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Hde-IV-5kr" secondAttribute="trailing" constant="20" id="wy9-VL-tcS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Hde-IV-5kr" secondAttribute="trailing" constant="60" id="wy9-VL-tcS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nhy-Je-mfe" secondAttribute="trailing" constant="88" id="yzd-mX-W52"/>
                         </constraints>
                     </view>
@@ -203,7 +211,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="50" y="265"/>
+            <point key="canvasLocation" x="48.799999999999997" y="264.91754122938534"/>
+        </scene>
+        <!--Filters View Controller-->
+        <scene sceneID="gWL-Uj-aUd">
+            <objects>
+                <viewController id="OAc-7O-0Ql" customClass="FiltersViewController" customModule="Instarant" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EpW-eJ-yWF"/>
+                        <viewControllerLayoutGuide type="bottom" id="tb0-uP-bZP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Q8l-pe-88f">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PsM-6C-mVM">
+                                <rect key="frame" x="0.0" y="42" width="375" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="categoryPicker" destination="PsM-6C-mVM" id="kjm-9t-Y17"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xxJ-1b-p6S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="911" y="466"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="settingsFilters" width="68" height="70"/>
+    </resources>
 </document>

@@ -83,7 +83,9 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                     
                     //Init a new placeModel
                     guard let newPlace:placeModel = object as! placeModel else {return}
-                    
+                    if newPlace.city == nil || newPlace.name == nil {
+                        return
+                    }
                     NetworkCalls.sharedInstance.getBestLocationIDforQueryTerm(queryTerm: newPlace.city! + " "  + newPlace.name!) { (locationID:String) in
                        print(locationID)
                         let newInstagramPlace = InstagramPlace()
