@@ -8,35 +8,57 @@
 
 import UIKit
 
-class FiltersViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class FiltersViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var categoryPicker: UIPickerView!
+    @IBOutlet weak var customSearchField: UITextField!
+    @IBOutlet weak var numberOfDaysTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         categoryPicker.dataSource = self
         categoryPicker.delegate = self
-
+        
+        categoryPicker.selectRow(Constants.selectedCategoryIndex, inComponent: 0, animated: false)
+        numberOfDaysTextField.delegate = self
+        numberOfDaysTextField.text = String(Constants.numberOfDaysToSearchForPosts)
     }
 
-//    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-//        
-//        let string = "myString"
-//        return NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName:UIColor.white])
-//    }
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 4
+        return 1
     }
     
     public func pickerView(_ pickerView: UIPickerView,
                            numberOfRowsInComponent component: Int) -> Int {
-        return 8
+        return Constants.categories.count
     }
     
-    public func pickerView(_ pickerView: UIPickerView,
-                           titleForRow row: Int,
-                           forComponent component: Int) -> String? {
-        return "hello"
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        
+        let string = Constants.categories[row]
+        return NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName:UIColor.white])
+    }
+    @IBAction func closeButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        Constants.selectedCategoryIndex = row
+        Constants.customQueryString = customSearchField.text
+    }
+    @IBAction func searchButtonTapped(_ sender: Any) {
+        Constants.customQueryString = customSearchField.text
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == self.numberOfDaysTextField {
+            if let string = self.numberOfDaysTextField.text {
+                if let int = Int(string) {
+                    Constants.numberOfDaysToSearchForPosts = int
+                }
+            }
+        }
     }
 }

@@ -30,17 +30,32 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
 
     var sortedPlaces = [(key:Int, value:InstagramPlace)]()
     
+    //for removing "power posters":
+    var userIdCache = [String]()
+    
     enum errorThrows:Error {
         case generic
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         downloadData()
+        self.navigationController?.navigationBar.barTintColor = UIColor.clear
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        NotificationCenter.default.addObserver(self, selector: #selector(downloadData), name: NSNotification.Name(rawValue: "reloadData"), object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if Constants.lastExecutedCategoryIndex != Constants.selectedCategoryIndex || Constants.customQueryString != Constants.lastExecutedCustomQueryString {
+            downloadData()
+        }
     }
     
     func downloadData() {
+        //reset any old data
+        places.removeAll()
+        mediaArrayAll.removeAllObjects()
+        tableView.reloadData()
         
         //Reachability
         if currentReachabilityStatus == .notReachable {
@@ -61,8 +76,14 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 return
                 }
             
-            let latString = String(theSpot.coordinate.latitude)
-            let lonString = String(theSpot.coordinate.longitude)
+            var latString = String(theSpot.coordinate.latitude)
+            var lonString = String(theSpot.coordinate.longitude)
+            
+            //If using a custom location
+            if let customLoc = Constants.customLocation {
+                latString = String(customLoc.latitude)
+                lonString = String(customLoc.longitude)
+            }
             
             FoursquareAPI.getNearbyRestaurantIDs(latString, longitude: lonString)  {
                 (foursquareArray:NSMutableArray?, closestCity:String?, success:Bool) in
@@ -76,7 +97,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                     }
                 self.cityOfUser = closestCity as String
                 
-                self.currentCityLabel.text = "Searching near \(self.cityOfUser)..."
+                self.currentCityLabel.text = "Searching for \(Constants.currentCategoryString) near \(self.cityOfUser)..."
                 
                 //Start of the individual lookup process
                 for object in foursquareArray {
@@ -123,7 +144,15 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 let media = InstagramMedia(json: photo, tagPrimary: nil)
                 let interval = Constants.oldestDateToLookFor.timeIntervalSince(media.date!)
                 if interval < 0 {
-                    batchToAppend.append(media)
+                    if let username = media.owner {
+                        if !self.userIdCache.contains(username) {
+                            batchToAppend.append(media)
+                            self.userIdCache.append(username)
+                        } else {
+                            //user is deemed to be a "power poster" and subsequent media of theirs is ignored.
+                        }
+                    }
+                    
                 }
 
             }
@@ -183,7 +212,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
             print(count)
         }
         
-        self.currentCityLabel.text = "Restaurants near \(self.cityOfUser)."
+        self.currentCityLabel.text = "\(Constants.currentCategoryString) near \(self.cityOfUser)."
 
         MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         self.tableView.reloadData()

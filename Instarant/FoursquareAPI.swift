@@ -25,24 +25,30 @@ class FoursquareAPI: UIViewController {
         
         //GOAL: To get a list of restaurant ID strings from the "explore" endpoint.
       
-        let category = "coffee"
+        let category = Constants.categories[Constants.selectedCategoryIndex]
+        
+        Constants.lastExecutedCategoryIndex = Constants.selectedCategoryIndex
+        
         let radius = String(0) //optional
-        let query = ""//"church"
         
 //        //location override:
 //        latitude = 34.164494
 //        longitude = -118.608243
         
-        let URL = "https://api.foursquare.com/v2/venues/explore?v=20131016&ll=\(latitude)%2C\(longitude)&section=\(category)&novelty=new\(radius)" + keys.authString
+        var URL = "https://api.foursquare.com/v2/venues/explore?v=20131016&ll=\(latitude)%2C\(longitude)&section=\(category)&novelty=new\(radius)" + keys.authString
         
-//        let URL = "https://api.foursquare.com/v2/venues/explore?v=20131016&ll=\(latitude)%2C\(longitude)&query=\(query)&novelty=new\(radius)" + keys.authString
+        if let query = Constants.customQueryString {
+            Constants.lastExecutedCustomQueryString = Constants.customQueryString
+            URL = "https://api.foursquare.com/v2/venues/explore?v=20131016&ll=\(latitude)%2C\(longitude)&query=\(query)&novelty=new\(radius)" + keys.authString
+
+        }
         let foursquareArray = NSMutableArray()
         
         Alamofire.request(URL)
             .responseJSON { response in
 
                 //Parsing the JSON:
-                if let json:JSON = JSON(response.result.value!) {
+                if let json:JSON = JSON(response.result.value) {
                     
                     if json["response"]["totalResults"] > 0 {
                         
