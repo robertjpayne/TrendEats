@@ -41,6 +41,7 @@
 		95015AA61E42E97B002DBEFA /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015AA51E42E97B002DBEFA /* UIImageView+Extensions.swift */; };
 		95015AA81E430840002DBEFA /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95015AA71E430840002DBEFA /* Utilities.swift */; };
 		950613E51EC2791E00B514FA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950613E41EC2791E00B514FA /* MapViewController.swift */; };
+		950613E71EC2889500B514FA /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950613E61EC2889500B514FA /* LocationTableViewCell.swift */; };
 		95266E6A1E441D57000F2160 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95266E691E441D57000F2160 /* FiltersViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +115,7 @@
 		95015AA51E42E97B002DBEFA /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		95015AA71E430840002DBEFA /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		950613E41EC2791E00B514FA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		950613E61EC2889500B514FA /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		95266E691E441D57000F2160 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		DAEDDD39CCDDA561E9C6FE2E /* Pods-Instarant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instarant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instarant/Pods-Instarant.debug.xcconfig"; sourceTree = "<group>"; };
 		ECBD276F01D077DB03009A06 /* Pods_Instarant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instarant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				3B920C7F1C295B1E004860F0 /* NearbyScrollView.swift */,
+				950613E61EC2889500B514FA /* LocationTableViewCell.swift */,
 				3BDE2FEC1C3B74B80033E2E6 /* WebView.swift */,
 				95266E691E441D57000F2160 /* FiltersViewController.swift */,
 				950613E41EC2791E00B514FA /* MapViewController.swift */,
@@ -547,6 +550,7 @@
 			files = (
 				3B920C6D1C290989004860F0 /* InstagramPaginationInfo.m in Sources */,
 				3BDE2FED1C3B74B80033E2E6 /* WebView.swift in Sources */,
+				950613E71EC2889500B514FA /* LocationTableViewCell.swift in Sources */,
 				3B920C6F1C290989004860F0 /* InstagramUser.m in Sources */,
 				95015AA61E42E97B002DBEFA /* UIImageView+Extensions.swift in Sources */,
 				95015A9A1E42B2D5002DBEFA /* InstagramUser.swift in Sources */,

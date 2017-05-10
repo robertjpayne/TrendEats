@@ -11,7 +11,7 @@ import MapKit
 
 struct Constants {
     
-    static var numberOfDaysToSearchForPosts:Int = 7
+    static var numberOfDaysToSearchForPosts:Int = 1
     static var oldestDateToLookFor:Date {
         return Date(timeIntervalSinceNow: TimeInterval(-Constants.numberOfDaysToSearchForPosts * 24 * 60 * 60))
     }

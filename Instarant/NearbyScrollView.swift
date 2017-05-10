@@ -236,16 +236,12 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LocationTableViewCell
         
-        
-        //Creates the entire image slider (for each cell):
-        let scroll1 = cell.viewWithTag(1) as! UIScrollView
         let label1 = cell.viewWithTag(2) as! UILabel
         let labelBigNumber = cell.viewWithTag(3) as! UILabel
         let labelTimeFrame = cell.viewWithTag(4) as! UILabel
-        let imageHeight:CGFloat = scroll1.frame.height
-        let imageWidth = imageHeight
+
         
         
         //The first time around we load the view even though the data hasn't been downloaded yet, so we just return the cell and at least it shows up as the dark grey color instead of nothing. Once the download has completed the table view will be called on to refresh and this will no longer apply since "mediaArrayAll" is now populated:
@@ -255,63 +251,15 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
 
         let particularPlace = sortedPlaces[indexPath.row].value
         let mediaArray = particularPlace.media
-        var index:CGFloat = -1
+        cell.loadImages(mediaArray)
         
         
         //Set labels:
         label1.text = " \(particularPlace.name.uppercased())"
         labelBigNumber.text = "\(mediaArray.count)"
         labelTimeFrame.text = "Instagram posts in the last \(Constants.numberOfDaysToSearchForPosts) days."
-        
-        for photo in mediaArray {
-            
-            index += 1
-            
-            if let photoClone = photo as? InstagramMedia{
-
-                
-                //kerning
-                let attributedString = label1.attributedText as! NSMutableAttributedString
-                attributedString.addAttribute(NSKernAttributeName, value: 1.0, range: NSMakeRange(0, attributedString.length))
-                label1.attributedText = attributedString
-                
-                //We make the UIImageView
-                let imageView = UIImageView(frame: CGRect(x: imageWidth*index, y: 0,width: imageWidth, height: imageHeight))
-                imageView.contentMode = .scaleAspectFill
-                
-                
-                imageView.loadImageInBackgroundWithCompletion(photoClone.display_src!, showActivityIndicator: true){_ in }
-
-                let scroll1Subviews = scroll1.subviews
-                if index == 0 {
-                    for view in scroll1Subviews {
-                        view.removeFromSuperview()
-                    }
-                }
-                
-                //Now we add that image view to the slider:
-                scroll1.addSubview(imageView)
-                
-                //add the tap recognizer:
-                //let tapGesture = UITapGestureRecognizer(target: self, action: "x")
-               // imageView.addGestureRecognizer(tapGesture)
-                var button   = UIButton()
-                button.frame = imageView.frame
-                button.tag = Int(index+1) + (indexPath.row+1) * 10000
-                button.addTarget(self, action: #selector(NearbyScrollView.imageTapped(_:)), for: UIControlEvents.touchUpInside)
-                scroll1.addSubview(button)
-                
-                
-            }//end if let photoClone
-            
-            
-        }//end for loop
-        
-        //Set the contentSize to fit all the pictures in the media Packet.
-        scroll1.contentSize = CGSize(width: imageWidth * CGFloat(mediaArray.count), height: scroll1.frame.height)
-//
-//        
-                return cell
+ 
+        return cell
     }
     
     

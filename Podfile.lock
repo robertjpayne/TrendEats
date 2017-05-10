@@ -17,6 +17,7 @@ PODS:
   - Alamofire (4.3.0)
   - ImageLoader (0.12.2)
   - INTULocationManager (4.2.0)
+  - Kingfisher (3.6.0)
   - MBProgressHUD (1.0.0)
   - SCLAlertView (0.7.0)
   - SwiftDate (4.0.11)
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - Alamofire
   - ImageLoader
   - INTULocationManager
+  - Kingfisher
   - MBProgressHUD
   - SCLAlertView
   - SwiftDate
@@ -37,11 +39,12 @@ SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   ImageLoader: f461c9641350d0b8df39c2d3785b263f15cd63c2
   INTULocationManager: 73f8254b3d05c897c56bb13c190e5b7c648c0998
+  Kingfisher: 300035f9a40634dc9b452d946c9f22250688fecd
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SwiftDate: a36d5ce7c86bed3ed92b583ccbf15045f374ac65
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 151a1bda5e048d5e1a53b0973d5f0dc07a018fab
+PODFILE CHECKSUM: de8052b660ba7f77bce1b9ffc33efbfcc434ba49
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0
