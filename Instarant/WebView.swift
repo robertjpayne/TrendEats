@@ -36,10 +36,6 @@ class WebView: UIViewController {
         let request = NSMutableURLRequest(url: url1!)
         
         self.myWebView.loadRequest(request as URLRequest)
-        
-       
-        
-        
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView!) {

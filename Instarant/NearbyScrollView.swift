@@ -11,7 +11,7 @@ import ImageLoader
 import MBProgressHUD
 import SCLAlertView
 
-class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDelegate, LocationTableViewCellDelegate {
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -46,9 +46,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if Constants.lastExecutedCategoryIndex != Constants.selectedCategoryIndex || Constants.customQueryString != Constants.lastExecutedCustomQueryString {
-            downloadData()
-        }
+    
     }
     
     func downloadData() {
@@ -162,9 +160,14 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
                 //We have reached the end
                 self.sortPlaces()
             } else {
-                //Keep getting next page.
-                self.places[locationID]?.media += batchToAppend
-                self.recursivePageFetch(locationID: locationID, completion: nil)
+                //Keep getting next page.fa
+                guard let object = self.places[locationID] else {return}
+                object.media += batchToAppend
+                
+                //Cap it to approx 100 images
+                if object.media.count < 100 {
+                    self.recursivePageFetch(locationID: locationID, completion: nil)
+                }
             }
             
             
@@ -237,6 +240,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LocationTableViewCell
+        cell.delegate = self
         
         let label1 = cell.viewWithTag(2) as! UILabel
         let labelBigNumber = cell.viewWithTag(3) as! UILabel
@@ -301,4 +305,10 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
+    //MARK: LocationTableViewCellDelegate Methods:
+    
+    func didTapImage(media:InstagramMedia) {
+        URLtoSendToWebView = media.pageLink!
+        self.performSegue(withIdentifier: "s1", sender: self)
+    }
 }

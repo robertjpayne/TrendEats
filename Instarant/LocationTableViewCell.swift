@@ -10,8 +10,14 @@ import UIKit
 import ImageLoader
 import Kingfisher
 
+protocol LocationTableViewCellDelegate: class {
+    func didTapImage(media:InstagramMedia)
+}
+
 class LocationTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    weak var delegate: LocationTableViewCellDelegate?
+    
     @IBOutlet weak var imageCollectionView: UICollectionView!
     var images = [InstagramMedia]()
     
@@ -30,9 +36,9 @@ class LocationTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollec
     func loadImages(_ images:[InstagramMedia]) {
         self.images = images
         imageCollectionView.reloadData()
-        if #available(iOS 10.0, tvOS 10.0, *) {
-            imageCollectionView.prefetchDataSource = self
-        }
+//        if #available(iOS 10.0, tvOS 10.0, *) {
+//            imageCollectionView.prefetchDataSource = self
+//        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -54,7 +60,7 @@ class LocationTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollec
         
         let imageView = cell.viewWithTag(1) as! UIImageView
         imageView.kf.indicatorType = .activity
-        if let url = images[indexPath.row].display_src {
+        if let url = images[indexPath.row].thumbnail_src_200 {
                         imageView.kf.setImage(with: URL(string: url), placeholder: nil, options: [.transition(ImageTransition.fade(1))], progressBlock: nil, completionHandler: nil)
         }
         
@@ -65,10 +71,6 @@ class LocationTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollec
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         let imageView = cell.viewWithTag(1) as! UIImageView
-        if let url = images[indexPath.row].display_src {
-//            imageView.kf.setImage(with: URL(string: url), placeholder: nil, options: [.transition(ImageTransition.fade(1))], progressBlock: nil, completionHandler: nil)
-        }
-        
         
     }
     
@@ -80,6 +82,10 @@ class LocationTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollec
 
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didTapImage(media: images[indexPath.row])
+    }
+    
 //    func collectionView(_ collectionView: UICollectionView,
 //                        layout collectionViewLayout: UICollectionViewLayout,
 //                        sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
@@ -88,12 +94,12 @@ class LocationTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollec
 //    }
 }
 
-extension LocationTableViewCell: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        let urls = indexPaths.flatMap {
-            URL(string: images[$0.row].display_src!)
-        }
-
-        ImagePrefetcher(urls: urls).start()
-    }
-}
+//extension LocationTableViewCell: UICollectionViewDataSourcePrefetching {
+//    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+//        let urls = indexPaths.flatMap {
+//            URL(string: images[$0.row].thumbnail_src!)
+//        }
+//
+//        ImagePrefetcher(urls: urls).start()
+//    }
+//}

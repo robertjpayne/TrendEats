@@ -23,6 +23,7 @@ class FiltersViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         categoryPicker.selectRow(Constants.selectedCategoryIndex, inComponent: 0, animated: false)
         numberOfDaysTextField.delegate = self
         numberOfDaysTextField.text = String(Constants.numberOfDaysToSearchForPosts)
+        customSearchField.text = Constants.customQueryString
     }
 
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -50,6 +51,7 @@ class FiltersViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBAction func searchButtonTapped(_ sender: Any) {
         Constants.customQueryString = customSearchField.text
         self.dismiss(animated: true, completion: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadData"), object: nil)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
