@@ -46,10 +46,16 @@ class FiltersViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         Constants.selectedCategoryIndex = row
-        Constants.customQueryString = customSearchField.text
+        customSearchField.text = nil
+        customSearchField.resignFirstResponder()
     }
     @IBAction func searchButtonTapped(_ sender: Any) {
         Constants.customQueryString = customSearchField.text
+        //not sure if necessary:
+        if customSearchField.text == "" {
+            Constants.customQueryString = nil
+        }
+        
         self.dismiss(animated: true, completion: nil)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadData"), object: nil)
     }

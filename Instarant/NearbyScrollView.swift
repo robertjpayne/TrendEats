@@ -20,15 +20,11 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var currentCityLabel: UILabel!
     
-    var mediaArrayAll = NSMutableArray()
-    
     var places = [Int:InstagramPlace]()
-    
-    var URLtoSendToWebView = ""
-    
-    var cityOfUser = ""
-
     var sortedPlaces = [(key:Int, value:InstagramPlace)]()
+
+    var URLtoSendToWebView = ""
+    var cityOfUser = ""
     
     //for removing "power posters":
     var userIdCache = [String]()
@@ -49,11 +45,16 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     
     }
     
+    func resetAllCachedData() {
+        places.removeAll()
+        sortedPlaces.removeAll()
+        tableView.reloadData()
+        userIdCache.removeAll()
+    }
+    
     func downloadData() {
         //reset any old data
-        places.removeAll()
-        mediaArrayAll.removeAllObjects()
-        tableView.reloadData()
+        resetAllCachedData()
         
         //Reachability
         if currentReachabilityStatus == .notReachable {
@@ -174,31 +175,6 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
-    func isSelfPost(media:InstagramMedia) {
-        //TODO: The username is not in the payload that we receive, so one option is to make another network call, expect we can't have the whole app wait on that before continuing. The other option would that when we make our inital query for the location place, there is a high likelyhood that the owner's account(s) will show up, we could save those ids and then exclude any media that has them.
-        
-        
-        
-//        need to filter out "self-posts" from the restaurant itself.
-//        let user = media.user as InstagramUser
-//        let userName = user.username
-//        print(userName)
-//        var index1 = userName?.index(userName?.startIndex, offsetBy: 0)
-//        if userName?.characters.count < 4 {
-//           index1 = userName.index(userName.startIndex, offsetBy: 2)
-//        } else {
-//            index1 = userName.index(userName.startIndex, offsetBy: 4)
-//        }
-//        var truncatedUsername = userName.substringToIndex(index1).lowercased()
-//        let locationName = object.locationName.lowercased()
-//        if locationName.contains(truncatedUsername) {
-//            print("\(userName) posted about their own place: \(locationName) and we've removed their post")
-//            
-//        } else {
-//           combo.add(object)
-//        }
-    }
-    
     func downloadErrorShow(){
         let alertView = SCLAlertView()
         alertView.addButton("Retry", target:self, selector:Selector("downloadData"))
@@ -224,13 +200,6 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
     
     // MARK: Table Views
     //----------------------------------------------------------------------------------------------------------------
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //To take the shading off the row when it's selected
-        self.tableView.deselectRow(at: indexPath, animated: true)
-    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -248,10 +217,10 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
 
         
         
-        //The first time around we load the view even though the data hasn't been downloaded yet, so we just return the cell and at least it shows up as the dark grey color instead of nothing. Once the download has completed the table view will be called on to refresh and this will no longer apply since "mediaArrayAll" is now populated:
-        if self.places.count < 1 {
-            return cell
-        }
+//        //The first time around we load the view even though the data hasn't been downloaded yet, so we just return the cell and at least it shows up as the dark grey color instead of nothing. Once the download has completed the table view will be called on to refresh and this will no longer apply since "mediaArrayAll" is now populated:
+//        if self.places.count < 1 {
+//            return cell
+//        }
 
         let particularPlace = sortedPlaces[indexPath.row].value
         let mediaArray = particularPlace.media

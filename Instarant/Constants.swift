@@ -11,7 +11,7 @@ import MapKit
 
 struct Constants {
     
-    static var numberOfDaysToSearchForPosts:Int = 1
+    static var numberOfDaysToSearchForPosts:Int = 3
     static var oldestDateToLookFor:Date {
         return Date(timeIntervalSinceNow: TimeInterval(-Constants.numberOfDaysToSearchForPosts * 24 * 60 * 60))
     }
@@ -34,4 +34,5 @@ struct Constants {
     static func isPotato() -> Bool {
         return false
     }
+    
 }
