@@ -60,6 +60,13 @@
 			remoteGlobalIDString = 3B12DA061C280C8A0053F14F;
 			remoteInfo = Instarant;
 		};
+		95E16DD11ECBB21D0008D9D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B12D9FF1C280C8A0053F14F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3B12DA061C280C8A0053F14F;
+			remoteInfo = Instarant;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +124,8 @@
 		950613E41EC2791E00B514FA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		950613E61EC2889500B514FA /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		95266E691E441D57000F2160 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		95E16DCC1ECBB21D0008D9D9 /* InstarantIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstarantIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		95E16DD01ECBB21D0008D9D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAEDDD39CCDDA561E9C6FE2E /* Pods-Instarant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instarant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instarant/Pods-Instarant.debug.xcconfig"; sourceTree = "<group>"; };
 		ECBD276F01D077DB03009A06 /* Pods_Instarant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instarant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -144,6 +153,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95E16DC91ECBB21D0008D9D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -154,6 +170,7 @@
 				3B12DA091C280C8A0053F14F /* Instarant */,
 				3B12DA1E1C280C8A0053F14F /* InstarantTests */,
 				3B12DA291C280C8A0053F14F /* InstarantUITests */,
+				95E16DCD1ECBB21D0008D9D9 /* InstarantIntegrationTests */,
 				3B12DA081C280C8A0053F14F /* Products */,
 				5EEC62848A21CCBE558A2A85 /* Frameworks */,
 				DA386702EB4ED243369AD6A4 /* Pods */,
@@ -166,6 +183,7 @@
 				3B12DA071C280C8A0053F14F /* Instarant.app */,
 				3B12DA1B1C280C8A0053F14F /* InstarantTests.xctest */,
 				3B12DA261C280C8A0053F14F /* InstarantUITests.xctest */,
+				95E16DCC1ECBB21D0008D9D9 /* InstarantIntegrationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -352,6 +370,30 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		95E16DCD1ECBB21D0008D9D9 /* InstarantIntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				95E16DD61ECBB23C0008D9D9 /* Cases */,
+				95E16DD71ECBB2440008D9D9 /* Supporting Files */,
+				95E16DD01ECBB21D0008D9D9 /* Info.plist */,
+			);
+			path = InstarantIntegrationTests;
+			sourceTree = "<group>";
+		};
+		95E16DD61ECBB23C0008D9D9 /* Cases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cases;
+			sourceTree = "<group>";
+		};
+		95E16DD71ECBB2440008D9D9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		DA386702EB4ED243369AD6A4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,13 +462,31 @@
 			productReference = 3B12DA261C280C8A0053F14F /* InstarantUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		95E16DCB1ECBB21D0008D9D9 /* InstarantIntegrationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95E16DD51ECBB21D0008D9D9 /* Build configuration list for PBXNativeTarget "InstarantIntegrationTests" */;
+			buildPhases = (
+				95E16DC81ECBB21D0008D9D9 /* Sources */,
+				95E16DC91ECBB21D0008D9D9 /* Frameworks */,
+				95E16DCA1ECBB21D0008D9D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				95E16DD21ECBB21D0008D9D9 /* PBXTargetDependency */,
+			);
+			name = InstarantIntegrationTests;
+			productName = InstarantIntegrationTests;
+			productReference = 95E16DCC1ECBB21D0008D9D9 /* InstarantIntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		3B12D9FF1C280C8A0053F14F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Chris Dunaetz";
 				TargetAttributes = {
@@ -443,6 +503,12 @@
 					3B12DA251C280C8A0053F14F = {
 						CreatedOnToolsVersion = 7.2;
 						LastSwiftMigration = 0820;
+						TestTargetID = 3B12DA061C280C8A0053F14F;
+					};
+					95E16DCB1ECBB21D0008D9D9 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 3NH3M673PL;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 3B12DA061C280C8A0053F14F;
 					};
 				};
@@ -463,6 +529,7 @@
 				3B12DA061C280C8A0053F14F /* Instarant */,
 				3B12DA1A1C280C8A0053F14F /* InstarantTests */,
 				3B12DA251C280C8A0053F14F /* InstarantUITests */,
+				95E16DCB1ECBB21D0008D9D9 /* InstarantIntegrationTests */,
 			);
 		};
 /* End PBXProject section */
@@ -487,6 +554,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3B12DA241C280C8A0053F14F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95E16DCA1ECBB21D0008D9D9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -596,6 +670,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95E16DC81ECBB21D0008D9D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -608,6 +689,11 @@
 			isa = PBXTargetDependency;
 			target = 3B12DA061C280C8A0053F14F /* Instarant */;
 			targetProxy = 3B12DA271C280C8A0053F14F /* PBXContainerItemProxy */;
+		};
+		95E16DD21ECBB21D0008D9D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3B12DA061C280C8A0053F14F /* Instarant */;
+			targetProxy = 95E16DD11ECBB21D0008D9D9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -796,6 +882,48 @@
 			};
 			name = Release;
 		};
+		95E16DD31ECBB21D0008D9D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = 3NH3M673PL;
+				INFOPLIST_FILE = InstarantIntegrationTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dunaetz.InstarantIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Instarant.app/Instarant";
+			};
+			name = Debug;
+		};
+		95E16DD41ECBB21D0008D9D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = 3NH3M673PL;
+				INFOPLIST_FILE = InstarantIntegrationTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dunaetz.InstarantIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Instarant.app/Instarant";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -834,6 +962,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		95E16DD51ECBB21D0008D9D9 /* Build configuration list for PBXNativeTarget "InstarantIntegrationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95E16DD31ECBB21D0008D9D9 /* Debug */,
+				95E16DD41ECBB21D0008D9D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

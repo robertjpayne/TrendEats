@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Instarant.xcscheme</key>
+		<key>Instarant.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -23,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>3B12DA251C280C8A0053F14F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>95E16DCB1ECBB21D0008D9D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E9568396BA51B5E4EF59818F6822B579"
+               BuildableName = "Pods_Instarant.framework"
+               BlueprintName = "Pods-Instarant"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "3B12DA061C280C8A0053F14F"
                BuildableName = "Instarant.app"
                BlueprintName = "Instarant"
@@ -45,6 +59,16 @@
                BlueprintIdentifier = "3B12DA251C280C8A0053F14F"
                BuildableName = "InstarantUITests.xctest"
                BlueprintName = "InstarantUITests"
+               ReferencedContainer = "container:Instarant.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "95E16DCB1ECBB21D0008D9D9"
+               BuildableName = "InstarantIntegrationTests.xctest"
+               BlueprintName = "InstarantIntegrationTests"
                ReferencedContainer = "container:Instarant.xcodeproj">
             </BuildableReference>
          </TestableReference>
