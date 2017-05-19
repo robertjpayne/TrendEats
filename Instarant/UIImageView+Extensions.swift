@@ -12,7 +12,7 @@ import Alamofire
 
 extension UIImageView {
 
-    func loadImageInBackgroundWithCompletion(_ url:String, showActivityIndicator:Bool, completion:@escaping (_ image:UIImage)->Void) {
+    func loadImageInBackgroundWithCompletion(_ url:String, showActivityIndicator:Bool, completion:((_ image:UIImage)->Void)?) {
         if showActivityIndicator {
             let spinner = MBProgressHUD.showAdded(to: self, animated: true)
             spinner.bezelView.color = UIColor.clear
@@ -23,7 +23,7 @@ extension UIImageView {
             case .success(let data):
                 if let image = UIImage(data: data) {
                     self.image = image
-                    completion(image)
+                    completion?(image)
                 }
             case .failure:
                 break
