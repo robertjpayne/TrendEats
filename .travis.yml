@@ -1,5 +1,4 @@
 language: objective-c
-xcode_project: Instarant.xcworkspace # path to your xcode_workspace folder
-xcode_scheme: Instarant
-#osx_image: xcode8.3
-#xcode_sdk: iphonesimulator10.3
+xcode_workspace: Instarant.xcworkspace
+osx_image: xcode8.3
+xcode_sdk: iphonesimulator10.3
