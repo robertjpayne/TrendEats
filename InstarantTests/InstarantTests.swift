@@ -1,3 +1,4 @@
+
 //
 //  InstarantTests.swift
 //  InstarantTests
@@ -24,13 +25,28 @@ class InstarantTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let exp = expectation(description: "")
+        FoursquareAPI.getNearbyRestaurantIDs("34", longitude: "-118") { (array, city, success) in
+
+            XCTAssertTrue(success, "this is the city: \(city)")
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1) { error in
+
+        }
+    
+//        XCTAssertTrue(Constants.isPotato(), "something error")
     }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    
     
 }
