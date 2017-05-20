@@ -18,10 +18,8 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramEngine.h"
 #import "InstagramComment.h"
 #import "InstagramMedia.h"
 #import "InstagramUser.h"
 #import "InstagramTag.h"
-#import "InstagramPaginationInfo.h"
 #import "InstagramLocation.h"
