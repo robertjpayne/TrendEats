@@ -2,9 +2,11 @@ language: objective-c
 # xcode_workspace: Instarant.xcworkspace
 osx_image: xcode8.3
 xcode_sdk: iphonesimulator10.3
-
-# script:
-#     xctool -workspace Instarant.xcworkspace -scheme Instarant build -sdk iphonesimulator
+before_script:
+    - brew update
+    - brew install xctool && brew cleanup xctool
+script:
+    - xctool -workspace Instarant.xcworkspace -scheme Instarant build -sdk iphonesimulator
 #     
 #     
 #     
@@ -12,5 +14,5 @@ xcode_sdk: iphonesimulator10.3
 #   - xctool -workspace Instarant.xcworkspace -scheme Instarant -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
   # - xctool test -workspace Instarant.xcworkspace -scheme Instarant -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
 
-script:
-    - xcodebuild -workspace Instarant.xcworkspace -scheme Instarant test
+# script:
+#     - xcodebuild -workspace Instarant.xcworkspace -scheme Instarant test
