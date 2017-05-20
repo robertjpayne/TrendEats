@@ -173,7 +173,7 @@ class NearbyScrollView: UIViewController, UITableViewDataSource, UITableViewDele
             
             
         }
-    
+    }
     
     func downloadErrorShow(){
         let alertView = SCLAlertView()
