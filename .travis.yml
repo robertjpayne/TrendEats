@@ -1,4 +1,10 @@
 language: objective-c
-xcode_workspace: Instarant.xcworkspace
+xcode_scheme: Instarant
 osx_image: xcode8.3
 xcode_sdk: iphonesimulator10.3
+
+# This needs to be done with Xcode 8:
+# http://stackoverflow.com/questions/41786984/error-unexpected-action-build-when-building-a-project-with-swift-3-and-cocoa
+script:
+    - xcodebuild clean build test -sdk iphonesimulator -workspace Instarant.xcworkspace -scheme Instarant -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.3' CODE_SIGNING_REQUIRED=NO
+    # - xcodebuild test -sdk iphonesimulator -workspace Instarant.xcworkspace -scheme Instarant CODE_SIGNING_REQUIRED=NO
