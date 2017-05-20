@@ -1,6 +1,6 @@
 language: objective-c
 xcode_workspace: Instarant.xcworkspace
-# xcode_scheme: Instarant
+xcode_scheme: Instarant
 osx_image: xcode8.3
 xcode_sdk: iphonesimulator10.3
 
