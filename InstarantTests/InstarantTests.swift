@@ -29,7 +29,7 @@ class InstarantTests: XCTestCase {
         let exp = expectation(description: "")
         FoursquareAPI.getNearbyRestaurantIDs("34", longitude: "-118") { (array, city, success) in
 
-            XCTAssertTrue(!success, "this is the city: \(city)")
+            XCTAssertTrue(success, "this is the city: \(city)")
             exp.fulfill()
         }
         
