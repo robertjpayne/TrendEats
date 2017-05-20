@@ -4,4 +4,4 @@ osx_image: xcode8.3
 xcode_sdk: iphonesimulator10.3
 
 script:
-    xctool -workspace Instarant.xcworkspace -scheme Instarant build test -sdk iphonesimulator
+    xctool -workspace Instarant.xcworkspace -scheme Instarant build -sdk iphonesimulator
