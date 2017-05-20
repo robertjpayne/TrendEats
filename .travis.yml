@@ -1,12 +1,11 @@
 language: objective-c
-# xcode_workspace: Instarant.xcworkspace
+xcode_workspace: Instarant.xcworkspace
+xcode_scheme: Instarant
 osx_image: xcode8.3
 xcode_sdk: iphonesimulator10.3
-before_script:
-    - brew update
-    - brew install xctool && brew cleanup xctool
-script:
-    - xctool -workspace Instarant.xcworkspace -scheme Instarant build -sdk iphonesimulator
+
+# script:
+    # - xctool -workspace Instarant.xcworkspace -scheme Instarant build -sdk iphonesimulator
 #     
 #     
 #     
