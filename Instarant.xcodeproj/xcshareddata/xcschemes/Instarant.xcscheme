@@ -70,20 +70,6 @@
                referenceType = "1">
             </LocationScenarioReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "95E16DCB1ECBB21D0008D9D9"
-               BuildableName = "InstarantIntegrationTests.xctest"
-               BlueprintName = "InstarantIntegrationTests"
-               ReferencedContainer = "container:Instarant.xcodeproj">
-            </BuildableReference>
-            <LocationScenarioReference
-               identifier = "San Francisco, CA, USA"
-               referenceType = "1">
-            </LocationScenarioReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
