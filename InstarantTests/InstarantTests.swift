@@ -22,15 +22,14 @@ class InstarantTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testFoursquareRestaurantsSucceeds() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         let exp = expectation(description: "")
         FoursquareAPI.getNearbyRestaurantIDs("34", longitude: "-118") { (array, city, success) in
-
-            XCTAssertTrue(success, "this is the city: \(city)")
             exp.fulfill()
+            XCTAssertTrue(success, "this is the city: \(city)")
         }
         
         waitForExpectations(timeout: 10) { error in
