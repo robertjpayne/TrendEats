@@ -33,11 +33,10 @@ class InstarantTests: XCTestCase {
             exp.fulfill()
         }
         
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 10) { error in
 
         }
-    
-//        XCTAssertTrue(Constants.isPotato(), "something error")
+
     }
     
     func testPerformanceExample() {
