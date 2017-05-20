@@ -1,6 +1,6 @@
 language: objective-c
 # xcode_workspace: Instarant.xcworkspace
-xcode_project: Instarant.xcodeproj
+# xcode_project: Instarant.xcodeproj
 xcode_scheme: Instarant
 osx_image: xcode8.3
 xcode_sdk: iphonesimulator10.3
@@ -16,3 +16,8 @@ xcode_sdk: iphonesimulator10.3
 
 # script:
 #     - xcodebuild -workspace Instarant.xcworkspace -scheme Instarant test
+
+
+
+script:
+    - xcodebuild clean build -sdk iphonesimulator -workspace Instarant.xcworkspace -scheme Instarant CODE_SIGNING_REQUIRED=NO
